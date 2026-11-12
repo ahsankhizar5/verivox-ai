@@ -167,7 +167,7 @@ export default function SignupPage() {
       );
 
       await refreshUser();
-      router.push('/dashboard');
+      window.location.href = '/dashboard';
     } catch (err: any) {
       toast.error(
         err.message || 'An error occurred during signup. Please try again.',

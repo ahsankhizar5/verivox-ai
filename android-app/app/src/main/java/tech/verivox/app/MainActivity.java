@@ -22,7 +22,7 @@ import androidx.core.content.ContextCompat;
 public class MainActivity extends AppCompatActivity {
     private static final int FILE_CHOOSER_RESULT_CODE = 1001;
     private static final int AUDIO_PERMISSION_REQUEST_CODE = 1002;
-    private static final String APP_URL = "https://verivox-kappa.vercel.app";
+    private static final String APP_URL = "https://www.verivox.studio";
 
     private WebView webView;
     private ValueCallback<Uri[]> filePathCallback;

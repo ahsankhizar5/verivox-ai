@@ -69,13 +69,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const data = await response.json();
     setUser(data.data.user);
     
-    // Redirect based on role
+    // Redirect based on role with full navigation so httpOnly cookie is sent immediately
     if (data.data.user.role === 'super_admin') {
-      router.push('/super-admin');
+      window.location.href = '/super-admin';
     } else if (data.data.user.role === 'admin') {
-      router.push('/admin');
+      window.location.href = '/admin';
     } else {
-      router.push('/dashboard');
+      window.location.href = '/dashboard';
     }
   };
 

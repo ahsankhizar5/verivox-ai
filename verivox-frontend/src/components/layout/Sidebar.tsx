@@ -110,7 +110,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Footer Actions */}
         <div className="p-4 border-t border-white/10 space-y-2">
           <a
-            href="https://github.com/ahsankhizar5/verivox-ai/releases/latest/download/VeriVox.apk"
+            href="/VeriVox.apk"
+            download="VeriVox.apk"
             className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-emerald-300 text-xs font-semibold transition-colors border border-white/10"
           >
             <Smartphone className="w-4 h-4 text-emerald-400" />
