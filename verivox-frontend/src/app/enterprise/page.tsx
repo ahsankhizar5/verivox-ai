@@ -158,8 +158,8 @@ console.log(data.verdict, data.confidence, data.temporalSegments);`;
                   Launch Chrome/Edge Extension
                 </a>
                 <a
-                  href="/VeriVox.apk"
-                  download="VeriVox.apk"
+                  href="/VeriVox-Native-v2.2.apk"
+                  download="VeriVox-Native-v2.2.apk"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm bg-white/10 hover:bg-white/15 text-white border border-white/15 transition-all"
                 >
                   <Smartphone className="w-4 h-4 text-amber-300" />
@@ -357,7 +357,7 @@ console.log(data.verdict, data.confidence, data.temporalSegments);`;
                 <div className="space-y-4">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-mono font-bold">
                     <Smartphone className="w-3.5 h-3.5" />
-                    <span>ANDROID MOBILE STUDIO (APK v2.1)</span>
+                    <span>ANDROID MOBILE STUDIO (Native APK v2.2)</span>
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-bold text-white">
                     VeriVox Native Android App
@@ -368,18 +368,18 @@ console.log(data.verdict, data.confidence, data.temporalSegments);`;
                   <div className="text-xs text-stone-300 space-y-1.5 font-mono bg-black/40 p-4 rounded-2xl border border-white/10">
                     <div>• Package ID: <span className="text-emerald-300">tech.verivox.app</span></div>
                     <div>• Signing: <span className="text-emerald-300">v1 JAR + v2 Full APK Signature</span></div>
-                    <div>• Size: <span className="text-emerald-300">2.32 MB (Direct Edge Download)</span></div>
+                    <div>• Size: <span className="text-emerald-300">2.39 MB (Direct Edge Download)</span></div>
                   </div>
                 </div>
 
                 <div>
                   <a
-                    href="/VeriVox.apk"
-                    download="VeriVox.apk"
+                    href="/VeriVox-Native-v2.2.apk"
+                    download="VeriVox-Native-v2.2.apk"
                     className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-emerald-400 to-teal-400 text-stone-950 hover:brightness-110 transition-all"
                   >
                     <Smartphone className="w-4 h-4" />
-                    Direct Download Android APK (2.3 MB)
+                    Direct Download Android APK (2.4 MB)
                   </a>
                 </div>
               </div>

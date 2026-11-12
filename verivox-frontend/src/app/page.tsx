@@ -72,12 +72,12 @@ export default function HomePage() {
                   Test Live Microphone Now
                 </a>
                 <a
-                  href="/VeriVox.apk"
-                  download="VeriVox.apk"
+                  href="/VeriVox-Native-v2.2.apk"
+                  download="VeriVox-Native-v2.2.apk"
                   className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-sm bg-white/10 hover:bg-white/15 text-white border border-white/15 transition-all"
                 >
                   <Smartphone className="w-4 h-4 text-amber-300" />
-                  Android APK (2.3 MB)
+                  Android APK (2.4 MB)
                 </a>
                 <a
                   href="/extension"
@@ -188,8 +188,8 @@ export default function HomePage() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <a
-                    href="/VeriVox.apk"
-                    download="VeriVox.apk"
+                    href="/VeriVox-Native-v2.2.apk"
+                    download="VeriVox-Native-v2.2.apk"
                     className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-400 to-orange-500 text-stone-950 hover:brightness-110 transition-all shadow-lg shadow-amber-500/20"
                   >
                     <Smartphone className="w-4 h-4" />

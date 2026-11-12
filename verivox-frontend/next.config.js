@@ -15,6 +15,23 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: '/VeriVox-Native-v2.2.apk',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/vnd.android.package-archive',
+          },
+          {
+            key: 'Content-Disposition',
+            value: 'attachment; filename="VeriVox-Native-v2.2.apk"',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'no-store, must-revalidate',
+          },
+        ],
+      },
+      {
         source: '/VeriVox.apk',
         headers: [
           {
@@ -23,11 +40,11 @@ const nextConfig = {
           },
           {
             key: 'Content-Disposition',
-            value: 'attachment; filename="VeriVox.apk"',
+            value: 'attachment; filename="VeriVox-Native-v2.2.apk"',
           },
           {
             key: 'Cache-Control',
-            value: 'public, max-age=3600',
+            value: 'no-store, must-revalidate',
           },
         ],
       },

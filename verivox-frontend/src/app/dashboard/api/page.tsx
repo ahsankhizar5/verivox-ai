@@ -108,8 +108,8 @@ console.log(await res.json());`;
               Launch Chrome Extension
             </a>
             <a
-              href="/VeriVox.apk"
-              download="VeriVox.apk"
+              href="/VeriVox-Native-v2.2.apk"
+              download="VeriVox-Native-v2.2.apk"
               className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700"
             >
               <Smartphone className="w-4 h-4" />

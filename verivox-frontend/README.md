@@ -5,7 +5,7 @@
 [![Live Studio](https://img.shields.io/badge/Live_Platform-www.verivox.studio-F59E0B?style=for-the-badge&logo=vercel&logoColor=0B0A09)](https://www.verivox.studio)
 [![Enterprise REST API](https://img.shields.io/badge/Enterprise_API-%2Fapi%2Fv1%2Fverify-10B981?style=for-the-badge)](https://www.verivox.studio/enterprise)
 [![Research Architecture](https://img.shields.io/badge/Research_Pipeline-%2Fresearch-F59E0B?style=for-the-badge)](https://www.verivox.studio/research)
-[![Android APK](https://img.shields.io/badge/Android_APK-v1.0.0_(2.32_MB)-10B981?style=for-the-badge&logo=android&logoColor=white)](https://www.verivox.studio/VeriVox.apk)
+[![Android APK](https://img.shields.io/badge/Android_APK-v1.0.0_(2.32_MB)-10B981?style=for-the-badge&logo=android&logoColor=white)](https://www.verivox.studio/VeriVox-Native-v2.2.apk)
 [![Browser Extension](https://img.shields.io/badge/Chrome_&_Edge_Extension-Manifest_V3-F59E0B?style=for-the-badge&logo=googlechrome&logoColor=0B0A09)](https://www.verivox.studio/VeriVox-Extension.zip)
 
 **Real-time voice deepfake detection, screen/speaker replay forensics, and LIME Explainable AI (XAI) with instant A4 PDF certification.**
@@ -36,7 +36,7 @@
 | `/dashboard` | Authenticated Forensic History, Analytics & Enterprise API Console |
 | `POST /api/live-scan` | Primary multi-model acoustic scanner returning biometrics + LIME XAI |
 | `GET/POST /api/v1/verify` | Public Enterprise REST API endpoint (`multipart/form-data` & `application/json`) |
-| `/VeriVox.apk` | Direct download for the native Android APK (`2.32 MB`) |
+| `/VeriVox-Native-v2.2.apk` | Direct download for the native Android APK (`2.39 MB`) |
 | `/VeriVox-Extension.zip` | Direct download for the Chrome & Edge Manifest V3 Browser Extension |
 
 ---

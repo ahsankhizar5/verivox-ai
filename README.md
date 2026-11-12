@@ -5,12 +5,12 @@
 [![Live Studio](https://img.shields.io/badge/Live_Platform-www.verivox.studio-F59E0B?style=for-the-badge&logo=vercel&logoColor=0B0A09)](https://www.verivox.studio)
 [![Enterprise REST API](https://img.shields.io/badge/Enterprise_API-%2Fapi%2Fv1%2Fverify-10B981?style=for-the-badge)](https://www.verivox.studio/enterprise)
 [![Research Architecture](https://img.shields.io/badge/Research_Pipeline-%2Fresearch-F59E0B?style=for-the-badge)](https://www.verivox.studio/research)
-[![Android APK](https://img.shields.io/badge/Android_APK-v1.0.0_(2.32_MB)-10B981?style=for-the-badge&logo=android&logoColor=white)](https://www.verivox.studio/VeriVox.apk)
+[![Android APK](https://img.shields.io/badge/Android_APK-v1.0.0_(2.32_MB)-10B981?style=for-the-badge&logo=android&logoColor=white)](https://www.verivox.studio/VeriVox-Native-v2.2.apk)
 [![Browser Extension](https://img.shields.io/badge/Chrome_&_Edge_Extension-Manifest_V3-F59E0B?style=for-the-badge&logo=googlechrome&logoColor=0B0A09)](https://www.verivox.studio/VeriVox-Extension.zip)
 
 **Zero-shot voice clone detection, screen/speaker replay forensics, and LIME Explainable AI (XAI) across Web, REST API, Browser Extension, and Android.**
 
-[Launch Live Scanner](https://www.verivox.studio/#scanner) · [Enterprise API Gateway](https://www.verivox.studio/enterprise) · [Research & Architecture](https://www.verivox.studio/research) · [Download Android APK](https://www.verivox.studio/VeriVox.apk) · [Download Browser Extension](https://www.verivox.studio/VeriVox-Extension.zip)
+[Launch Live Scanner](https://www.verivox.studio/#scanner) · [Enterprise API Gateway](https://www.verivox.studio/enterprise) · [Research & Architecture](https://www.verivox.studio/research) · [Download Android APK](https://www.verivox.studio/VeriVox-Native-v2.2.apk) · [Download Browser Extension](https://www.verivox.studio/VeriVox-Extension.zip)
 
 </div>
 
@@ -151,7 +151,7 @@ Open `http://localhost:3000` in your browser.
 
 ### 3. Android APK (`android-app`)
 
-- **Direct Install:** Download [`https://www.verivox.studio/VeriVox.apk`](https://www.verivox.studio/VeriVox.apk) (`2.32 MB`, signed Android universal APK).
+- **Direct Install:** Download [`https://www.verivox.studio/VeriVox-Native-v2.2.apk`](https://www.verivox.studio/VeriVox-Native-v2.2.apk) (`2.39 MB`, signed Android universal APK).
 - **Build from Source:**
   ```bash
   cd android-app

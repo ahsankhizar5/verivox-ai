@@ -93,8 +93,8 @@ export const Navbar: React.FC = () => {
             </Link>
 
             <a
-              href="/VeriVox.apk"
-              download="VeriVox.apk"
+              href="/VeriVox-Native-v2.2.apk"
+              download="VeriVox-Native-v2.2.apk"
               className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-400/30 text-xs font-semibold transition-all"
             >
               <Smartphone className="w-3.5 h-3.5" />
@@ -175,12 +175,12 @@ export const Navbar: React.FC = () => {
                 </Link>
               ))}
               <a
-                href="/VeriVox.apk"
-                download="VeriVox.apk"
+                href="/VeriVox-Native-v2.2.apk"
+                download="VeriVox-Native-v2.2.apk"
                 className="flex items-center gap-2 text-sm font-semibold text-amber-300 px-2 py-1.5"
               >
                 <Smartphone className="w-4 h-4" />
-                Download Android APK (2.3 MB)
+                Download Android APK (2.4 MB)
               </a>
               <Link
                 href="/extension"

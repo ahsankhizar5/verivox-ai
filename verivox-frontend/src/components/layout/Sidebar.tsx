@@ -119,8 +119,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
       {/* APK, Extension & Logout */}
       <div className="p-3.5 border-t border-white/10 space-y-2">
         <a
-          href="/VeriVox.apk"
-          download="VeriVox.apk"
+          href="/VeriVox-Native-v2.2.apk"
+          download="VeriVox-Native-v2.2.apk"
           className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 text-xs font-semibold transition-colors border border-amber-400/30"
         >
           <Smartphone className="w-4 h-4 text-amber-400" />

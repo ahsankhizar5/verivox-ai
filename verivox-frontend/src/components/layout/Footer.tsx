@@ -25,8 +25,8 @@ export const Footer: React.FC = () => {
                 <span>verivox.studio • All XAI Nodes Online</span>
               </div>
               <a
-                href="/VeriVox.apk"
-                download="VeriVox.apk"
+                href="/VeriVox-Native-v2.2.apk"
+                download="VeriVox-Native-v2.2.apk"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-amber-300 text-xs font-semibold transition-colors"
               >
                 <Smartphone className="w-3.5 h-3.5" />
@@ -108,8 +108,8 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-sm">
               <li>
                 <a
-                  href="/VeriVox.apk"
-                  download="VeriVox.apk"
+                  href="/VeriVox-Native-v2.2.apk"
+                  download="VeriVox-Native-v2.2.apk"
                   className="inline-flex items-center gap-1 text-amber-300 hover:text-amber-200 font-medium transition-colors"
                 >
                   <span>Direct Android APK Download</span>
