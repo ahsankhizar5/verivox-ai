@@ -59,7 +59,7 @@ export default function AboutPage() {
       status: 'Live Now',
       title: 'VeriVox Web Studio & PDF Reports',
       description:
-        'Launched the live web application at verivox.tech with browser audio preview and one click PDF report exports.',
+        'Launched the live web application at verivox.studio with browser audio preview and one click PDF report exports.',
     },
     {
       phase: 'Stage 04',
@@ -181,7 +181,7 @@ export default function AboutPage() {
         {/* CTA */}
         <section className="py-16 sm:py-20 bg-white">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
-            <div className="rounded-3xl bg-gradient-to-r from-[#090d16] via-[#17112e] to-primary-700 text-white p-8 sm:p-12 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 shadow-xl">
+            <div className="rounded-3xl bg-gradient-to-r from-[#0b0a09] via-[#161411] to-[#1c1917] text-white p-8 sm:p-12 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 shadow-xl">
               <div className="max-w-xl">
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                   Test VeriVox on your own audio files today

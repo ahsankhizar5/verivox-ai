@@ -32,14 +32,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor("#090d16"));
-            getWindow().setNavigationBarColor(Color.parseColor("#090d16"));
+            getWindow().setStatusBarColor(Color.parseColor("#0B0A09"));
+            getWindow().setNavigationBarColor(Color.parseColor("#0B0A09"));
         }
 
         requestAudioPermissionIfNeeded();
 
         webView = new WebView(this);
-        webView.setBackgroundColor(Color.parseColor("#090d16"));
+        webView.setBackgroundColor(Color.parseColor("#0B0A09"));
         setContentView(webView);
 
         WebSettings settings = webView.getSettings();

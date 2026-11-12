@@ -18,7 +18,7 @@ export default function PrivacyPage() {
                 Privacy Policy
               </h1>
               <p className="font-mono text-xs text-secondary-500 uppercase tracking-wider">
-                Effective for verivox.tech • Updated 2026
+                Effective for verivox.studio • Updated 2026
               </p>
             </div>
           </div>
@@ -29,7 +29,7 @@ export default function PrivacyPage() {
             <Card padding="lg">
               <h2 className="text-xl font-bold text-secondary-950 mb-3">1. Overview</h2>
               <p className="text-sm sm:text-base text-secondary-600 leading-relaxed">
-                VeriVox operates the deepfake audio detection platform at verivox.tech. This policy outlines what data we collect when you create an account and upload audio recordings for verification, how that data is processed, and how you can delete it.
+                VeriVox operates the deepfake audio detection platform at verivox.studio. This policy outlines what data we collect when you create an account and upload audio recordings for verification, how that data is processed, and how you can delete it.
               </p>
             </Card>
 

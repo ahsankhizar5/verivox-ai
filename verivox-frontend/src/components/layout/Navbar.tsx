@@ -11,11 +11,12 @@ import {
   LogOut,
   ArrowRight,
   Smartphone,
+  Puzzle,
 } from 'lucide-react';
 
 export const BrandLogo: React.FC<{ darkText?: boolean }> = ({ darkText = true }) => (
   <span className="inline-flex items-center gap-2.5 group">
-    <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#141210] via-[#1c1917] to-[#292524] border border-amber-400/30 flex items-center justify-center shadow-md relative overflow-hidden">
+    <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#141210] via-[#1c1917] to-[#292524] border border-amber-400/35 flex items-center justify-center shadow-md relative overflow-hidden">
       <svg
         viewBox="0 0 32 32"
         className="w-5 h-5"
@@ -24,9 +25,9 @@ export const BrandLogo: React.FC<{ darkText?: boolean }> = ({ darkText = true })
       >
         <defs>
           <linearGradient id="vvGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#34d399" />
-            <stop offset="50%" stopColor="#f59e0b" />
-            <stop offset="100%" stopColor="#fb7185" />
+            <stop offset="0%" stopColor="#fbbf24" />
+            <stop offset="55%" stopColor="#f59e0b" />
+            <stop offset="100%" stopColor="#10b981" />
           </linearGradient>
         </defs>
         <rect x="3" y="12" width="3.2" height="8" rx="1.6" fill="url(#vvGrad)" />
@@ -41,7 +42,7 @@ export const BrandLogo: React.FC<{ darkText?: boolean }> = ({ darkText = true })
         darkText ? 'text-secondary-950' : 'text-white'
       }`}
     >
-      Veri<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-400">Vox</span>
+      Veri<span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-emerald-400">Vox</span>
     </span>
   </span>
 );
@@ -52,11 +53,11 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { href: '/#live-scanner', label: 'Live Scanner' },
+    { href: '/enterprise', label: 'Enterprise & API' },
     { href: '/research', label: 'Research & XAI' },
     { href: '/pricing', label: 'Pricing' },
     { href: '/security', label: 'Security' },
     { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' },
   ];
 
   return (
@@ -69,7 +70,7 @@ export const Navbar: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -81,12 +82,21 @@ export const Navbar: React.FC = () => {
             ))}
           </div>
 
-          {/* Auth Buttons + Direct APK Download */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Auth Buttons + Direct APK & Extension Downloads */}
+          <div className="hidden md:flex items-center gap-2.5">
+            <a
+              href="/VeriVox-Extension.zip"
+              download="VeriVox-Extension.zip"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-400/30 text-xs font-semibold transition-all"
+            >
+              <Puzzle className="w-3.5 h-3.5" />
+              <span>Extension</span>
+            </a>
+
             <a
               href="/VeriVox.apk"
               download="VeriVox.apk"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-400/30 text-xs font-semibold transition-all"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-400/30 text-xs font-semibold transition-all"
             >
               <Smartphone className="w-3.5 h-3.5" />
               <span>Android APK</span>
@@ -172,6 +182,14 @@ export const Navbar: React.FC = () => {
               >
                 <Smartphone className="w-4 h-4" />
                 Download Android APK (2.3 MB)
+              </a>
+              <a
+                href="/VeriVox-Extension.zip"
+                download="VeriVox-Extension.zip"
+                className="flex items-center gap-2 text-sm font-semibold text-emerald-300 px-2 py-1.5"
+              >
+                <Puzzle className="w-4 h-4" />
+                Download Browser Extension (.zip)
               </a>
               <div className="pt-3 border-t border-white/10 flex flex-col space-y-2">
                 {isAuthenticated ? (

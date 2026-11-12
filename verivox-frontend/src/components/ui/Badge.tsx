@@ -10,12 +10,12 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   ({ className, variant = 'primary', size = 'md', children, ...props }, ref) => {
     const variantStyles = {
       default: 'bg-secondary-100 text-secondary-800 border-secondary-200',
-      primary: 'bg-violet-50 text-violet-800 border-violet-200',
+      primary: 'bg-amber-50 text-amber-900 border-amber-200',
       secondary: 'bg-secondary-100 text-secondary-700 border-secondary-200',
       success: 'bg-emerald-50 text-emerald-800 border-emerald-200',
       danger: 'bg-rose-50 text-rose-800 border-rose-200',
       warning: 'bg-amber-50 text-amber-800 border-amber-200',
-      info: 'bg-teal-50 text-teal-800 border-teal-200',
+      info: 'bg-emerald-50 text-emerald-900 border-emerald-200',
     };
 
     const sizeStyles = {

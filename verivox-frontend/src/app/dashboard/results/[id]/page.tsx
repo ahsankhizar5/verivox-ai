@@ -196,7 +196,7 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
         doc.setFontSize(7.5);
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(113, 113, 122);
-        doc.text('verivox.tech | verivoxofficial@gmail.com', m, H - 8);
+        doc.text('verivox.studio | verivoxofficial@gmail.com', m, H - 8);
         doc.text(
           `Page ${pageNum} / ${total}  •  Generated ${new Date().toLocaleDateString()}`,
           W - m,

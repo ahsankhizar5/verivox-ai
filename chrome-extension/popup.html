@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>VeriVox AI Extension</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 390px;
+      min-height: 510px;
+      background: #0B0A09;
+      color: #FAF8F5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 16px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(245, 158, 11, 0.22);
+      margin-bottom: 14px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+    }
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #1c1917, #292524);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FBBF24;
+      font-weight: 900;
+      font-size: 13px;
+    }
+    .brand span {
+      background: linear-gradient(90deg, #FBBF24, #10B981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .status-pill {
+      font-family: monospace;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.14);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: #141210;
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 14px;
+    }
+    .tab-btn {
+      background: transparent;
+      color: #A8A29E;
+      border: none;
+      padding: 8px 6px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .tab-btn.active {
+      background: linear-gradient(90deg, #FBBF24, #F59E0B);
+      color: #0B0A09;
+    }
+    .card {
+      background: #141210;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #FFFFFF;
+    }
+    .card p {
+      font-size: 12px;
+      color: #A8A29E;
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+    .bars {
+      height: 52px;
+      background: #0B0A09;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 3px;
+      margin-bottom: 14px;
+    }
+    .bar {
+      flex: 1;
+      height: 22%;
+      border-radius: 4px;
+      background: #292524;
+      transition: height 0.08s ease;
+    }
+    .bar.live {
+      background: linear-gradient(180deg, #FBBF24, #10B981);
+    }
+    .primary-btn {
+      width: 100%;
+      padding: 11px 16px;
+      border-radius: 11px;
+      border: none;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      background: linear-gradient(90deg, #FBBF24, #F59E0B, #EA580C);
+      color: #0B0A09;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.22);
+    }
+    .stop-btn {
+      width: 100%;
+      padding: 11px 16px;
+      border-radius: 11px;
+      border: none;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      background: linear-gradient(90deg, #F43F5E, #EA580C);
+      color: #FFFFFF;
+    }
+    .result-box {
+      display: none;
+      background: #141210;
+      border-radius: 16px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      margin-bottom: 12px;
+    }
+    .verdict-pill {
+      display: inline-block;
+      font-family: monospace;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+    }
+    .meter-row {
+      margin-top: 10px;
+      font-size: 11px;
+      font-family: monospace;
+    }
+    .meter-bar {
+      height: 7px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+    .xai-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      margin-top: 10px;
+    }
+    .xai-cell {
+      background: #0B0A09;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 6px;
+      text-align: center;
+      font-family: monospace;
+      font-size: 10px;
+    }
+    .footer-link {
+      display: block;
+      text-align: center;
+      font-size: 11px;
+      color: #FBBF24;
+      text-decoration: none;
+      margin-top: 8px;
+      font-family: monospace;
+    }
+    .error-msg {
+      display: none;
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      color: #FDA4AF;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="brand">
+      <div class="brand-icon">V</div>
+      <div>Veri<span>Vox</span> Studio</div>
+    </div>
+    <span class="status-pill">XAI LIVE</span>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-tab">Tab Audio</button>
+    <button class="tab-btn" id="tab-mic">Live Mic</button>
+    <button class="tab-btn" id="tab-file">Upload File</button>
+  </div>
+
+  <div id="error-box" class="error-msg"></div>
+
+  <div class="card" id="capture-card">
+    <h3 id="mode-title">Capture Active Browser Tab Audio</h3>
+    <p id="mode-desc">Verify audio playing right now on YouTube, WhatsApp Web, TikTok, or any browser tab.</p>
+
+    <div class="bars" id="bars-container"></div>
+
+    <input type="file" id="file-input" accept=".wav,.mp3,.flac,.m4a,.webm,.ogg,audio/*" style="display:none;" />
+    <button class="primary-btn" id="action-btn">Start Tab Audio Capture</button>
+  </div>
+
+  <div class="result-box" id="result-box">
+    <span class="verdict-pill" id="res-badge">VERIFIED</span>
+    <div style="font-size:15px; font-weight:800; color:#FFF;" id="res-category">Authentic Voice</div>
+    <div style="font-size:11px; color:#D6D3D1; margin-top:3px;" id="res-summary"></div>
+
+    <div class="meter-row">
+      <div style="display:flex; justify-content:space-between; color:#34D399;">
+        <span>AUTHENTIC HUMAN</span>
+        <span id="res-real">0%</span>
+      </div>
+      <div class="meter-bar">
+        <div id="bar-real" style="height:100%; width:0%; background:#10B981;"></div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; color:#FB7185;">
+        <span>SYNTHETIC / AI CLONE</span>
+        <span id="res-fake">0%</span>
+      </div>
+      <div class="meter-bar">
+        <div id="bar-fake" style="height:100%; width:0%; background:#F43F5E;"></div>
+      </div>
+    </div>
+
+    <div style="font-size:10px; font-family:monospace; color:#FBBF24; margin-top:8px;">
+      LIME TEMPORAL ATTRIBUTION WINDOWS:
+    </div>
+    <div class="xai-grid" id="xai-grid"></div>
+  </div>
+
+  <a href="https://www.verivox.studio" target="_blank" class="footer-link">
+    Open Full Studio Console at verivox.studio →
+  </a>
+
+  <script src="popup.js"></script>
+</body>
+</html>

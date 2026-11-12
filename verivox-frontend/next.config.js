@@ -31,6 +31,23 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: '/VeriVox-Extension.zip',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/zip',
+          },
+          {
+            key: 'Content-Disposition',
+            value: 'attachment; filename="VeriVox-Extension.zip"',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600',
+          },
+        ],
+      },
     ];
   },
   env: {

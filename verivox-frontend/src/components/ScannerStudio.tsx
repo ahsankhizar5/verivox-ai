@@ -433,7 +433,7 @@ export const ScannerStudio: React.FC<ScannerStudioProps> = ({
     doc.text(
       `${
         isSpoof ? 'SYNTHETIC / AI AUDIO DETECTED' : 'AUTHENTIC HUMAN VOICE VERIFIED'
-      }  —  ${(scanResult.confidence * 100).toFixed(1)}% CONFIDENCE`,
+      }  :  ${(scanResult.confidence * 100).toFixed(1)}% CONFIDENCE`,
       m + 6,
       y + 11.2
     );
@@ -933,7 +933,7 @@ export const ScannerStudio: React.FC<ScannerStudioProps> = ({
                     <BarChart3 className="w-5 h-5 text-amber-400" />
                     <div>
                       <h4 className="text-sm sm:text-base font-bold text-white">
-                        Explainable AI (XAI) — LIME Temporal Segment Attribution
+                        Explainable AI (XAI) : LIME Temporal Segment Attribution
                       </h4>
                       <p className="text-xs text-slate-400">
                         Pinpoints which exact time windows and frequency bands drove the authenticity verdict

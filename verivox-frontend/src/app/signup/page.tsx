@@ -181,7 +181,7 @@ export default function SignupPage() {
   return (
     <div className="min-h-[100dvh] grid grid-cols-1 lg:grid-cols-12 bg-white">
       {/* Left Side: Dark Slate Brand Panel */}
-      <div className="hidden lg:flex lg:col-span-6 bg-gradient-to-br from-[#090d16] via-[#17112e] to-primary-900 text-white flex-col justify-between p-12 xl:p-16">
+      <div className="hidden lg:flex lg:col-span-6 bg-gradient-to-br from-[#0b0a09] via-[#161411] to-[#1c1917] text-white flex-col justify-between p-12 xl:p-16">
         <div className="flex items-center justify-between">
           <Link href="/" className="inline-flex items-center">
             <BrandLogo darkText={false} />
@@ -229,7 +229,7 @@ export default function SignupPage() {
         </div>
 
         <div className="flex items-center justify-between text-xs text-slate-400 pt-6 border-t border-white/15">
-          <span>verivox.tech</span>
+          <span>verivox.studio</span>
           <span className="flex items-center gap-1.5 text-emerald-300">
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
             No Credit Card Required
@@ -533,7 +533,7 @@ export default function SignupPage() {
         </div>
 
         <div className="text-center text-xs text-secondary-400">
-          VeriVox • verivox.tech
+          VeriVox • verivox.studio
         </div>
       </div>
     </div>

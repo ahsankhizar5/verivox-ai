@@ -30,5 +30,9 @@ LA/
 exp_result/
 **/exp_result/
 *.zip
+!verivox-frontend/public/VeriVox-Extension.zip
 lime_graph.png
 .agents/
+.git-basat/
+**/.git-basat/
+prototypes.html

@@ -18,7 +18,7 @@ export default function TermsPage() {
                 Terms & Conditions
               </h1>
               <p className="font-mono text-xs text-secondary-500 uppercase tracking-wider">
-                Effective for verivox.tech • Updated 2026
+                Effective for verivox.studio • Updated 2026
               </p>
             </div>
           </div>
@@ -29,7 +29,7 @@ export default function TermsPage() {
             <Card padding="lg">
               <h2 className="text-xl font-bold text-secondary-950 mb-3">1. Acceptance of Terms</h2>
               <p className="text-sm sm:text-base text-secondary-600 leading-relaxed">
-                By accessing or using VeriVox (verivox.tech), you agree to be bound by these Terms & Conditions. VeriVox provides AI-powered voice verification and deepfake audio detection software.
+                By accessing or using VeriVox (verivox.studio), you agree to be bound by these Terms & Conditions. VeriVox provides AI-powered voice verification and deepfake audio detection software.
               </p>
             </Card>
 

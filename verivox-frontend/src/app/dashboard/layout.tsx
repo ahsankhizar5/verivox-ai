@@ -53,7 +53,7 @@ export default function DashboardLayout({
       />
 
       {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#090d16] text-white border-b border-white/10 flex items-center justify-between px-4 z-30">
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#0b0a09] text-white border-b border-white/10 flex items-center justify-between px-4 z-30">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setSidebarOpen(true)}

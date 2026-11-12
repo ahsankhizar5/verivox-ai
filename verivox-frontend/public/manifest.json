@@ -1,12 +1,11 @@
 {
-  "name": "VeriVox AI Voice & Deepfake Scanner",
+  "name": "VeriVox AI Studio",
   "short_name": "VeriVox",
-  "description": "Real-time AI voice clone, mimicry, screen audio, and deepfake detection studio.",
+  "description": "Real-Time AI Voice, Mimicry & Screen Audio Authenticity Studio",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#090d16",
-  "theme_color": "#8b5cf6",
-  "orientation": "portrait-primary",
+  "background_color": "#0B0A09",
+  "theme_color": "#0B0A09",
   "icons": [
     {
       "src": "/icon.svg",

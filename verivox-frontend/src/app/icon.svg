@@ -1,23 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <defs>
-    <linearGradient id="vv-bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#090d16" />
-      <stop offset="100%" stop-color="#17132b" />
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0B0A09" />
+      <stop offset="55%" stop-color="#1C1917" />
+      <stop offset="100%" stop-color="#0F1713" />
     </linearGradient>
-    <linearGradient id="vv-wave" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#10b981" />
-      <stop offset="50%" stop-color="#8b5cf6" />
-      <stop offset="100%" stop-color="#f43f5e" />
+    <linearGradient id="waveGrad" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="55%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#10B981" />
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="16" fill="url(#vv-bg)" />
-  <rect x="6" y="28" width="4" height="8" rx="2" fill="url(#vv-wave)" />
-  <rect x="12" y="22" width="4" height="20" rx="2" fill="url(#vv-wave)" />
-  <rect x="18" y="16" width="4" height="32" rx="2" fill="url(#vv-wave)" />
-  <rect x="24" y="11" width="4" height="42" rx="2" fill="url(#vv-wave)" />
-  <rect x="30" y="6" width="4" height="52" rx="2" fill="url(#vv-wave)" />
-  <rect x="36" y="11" width="4" height="42" rx="2" fill="url(#vv-wave)" />
-  <rect x="42" y="16" width="4" height="32" rx="2" fill="url(#vv-wave)" />
-  <rect x="48" y="22" width="4" height="20" rx="2" fill="url(#vv-wave)" />
-  <rect x="54" y="28" width="4" height="8" rx="2" fill="url(#vv-wave)" />
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)" stroke="#F59E0B" stroke-opacity="0.35" stroke-width="2" />
+  <rect x="11" y="25" width="5.5" height="14" rx="2.75" fill="url(#waveGrad)" />
+  <rect x="20.5" y="16" width="5.5" height="32" rx="2.75" fill="url(#waveGrad)" />
+  <rect x="29.5" y="9" width="6" height="46" rx="3" fill="url(#waveGrad)" />
+  <rect x="39" y="18" width="5.5" height="28" rx="2.75" fill="url(#waveGrad)" />
+  <rect x="48" y="24" width="5.5" height="16" rx="2.75" fill="url(#waveGrad)" />
 </svg>

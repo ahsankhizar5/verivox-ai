@@ -24,11 +24,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      'inline-flex items-center justify-center font-semibold tracking-tight rounded-xl transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed select-none';
+      'inline-flex items-center justify-center font-bold tracking-tight rounded-xl transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed select-none';
 
     const variantStyles = {
       primary:
-        'bg-gradient-to-r from-violet-600 via-purple-600 to-rose-500 text-white hover:brightness-110 focus-visible:ring-violet-500 shadow-sm shadow-violet-600/25',
+        'bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-stone-950 hover:brightness-110 focus-visible:ring-amber-500 shadow-sm shadow-amber-500/20',
       secondary:
         'bg-emerald-50 text-emerald-900 border border-emerald-200 hover:bg-emerald-100 focus-visible:ring-emerald-500',
       success:
@@ -38,9 +38,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       warning:
         'bg-warning-500 text-secondary-950 hover:bg-warning-600 focus-visible:ring-warning-500 border border-warning-600/20 shadow-soft',
       outline:
-        'border border-secondary-300 bg-white text-secondary-900 hover:bg-violet-50/40 hover:border-violet-400 focus-visible:ring-violet-500',
+        'border border-secondary-300 bg-white text-secondary-900 hover:bg-amber-50/50 hover:border-amber-400 focus-visible:ring-amber-500',
       ghost:
-        'text-secondary-700 hover:bg-violet-50/60 hover:text-violet-700 focus-visible:ring-violet-500',
+        'text-secondary-700 hover:bg-amber-50/60 hover:text-amber-800 focus-visible:ring-amber-500',
     };
 
     const sizeStyles = {

@@ -56,7 +56,7 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
               {/* Left Column: Direct Channels */}
               <div className="lg:col-span-5 space-y-6">
-                <div className="p-7 rounded-2xl bg-gradient-to-br from-[#090d16] to-[#17112e] text-white space-y-6 shadow-lg">
+                <div className="p-7 rounded-2xl bg-gradient-to-br from-[#0b0a09] to-[#161411] text-white space-y-6 shadow-lg">
                   <div>
                     <span className="text-xs font-semibold text-emerald-300 uppercase tracking-wider">
                       Direct Contact
@@ -88,12 +88,12 @@ export default function ContactPage() {
                       <div>
                         <div className="text-xs text-emerald-300/80">Website</div>
                         <a
-                          href="https://verivox.tech"
+                          href="https://verivox.studio"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-white hover:text-emerald-300 transition-colors font-medium"
                         >
-                          verivox.tech
+                          verivox.studio
                         </a>
                       </div>
                     </div>

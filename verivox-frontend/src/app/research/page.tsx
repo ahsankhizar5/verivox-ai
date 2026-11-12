@@ -195,7 +195,7 @@ export default function ResearchPage() {
                     <li className="flex items-start gap-2">
                       <span className="text-emerald-400 font-bold">•</span>
                       <span>
-                        <strong>Pitch Micro-Jitter (1.1% – 8.5%):</strong> Natural cycle-to-cycle glottal fold variation in voiced vowels.
+                        <strong>Pitch Micro-Jitter (1.1% to 8.5%):</strong> Natural cycle-to-cycle glottal fold variation in voiced vowels.
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
@@ -228,7 +228,7 @@ export default function ResearchPage() {
                     <li className="flex items-start gap-2">
                       <span className="text-rose-400 font-bold">•</span>
                       <span>
-                        <strong>Vocoder Phase Periodicity:</strong> HiFi-GAN and BigVGAN upsamplers introduce subtle 3.2–8.0 kHz spectral grids.
+                        <strong>Vocoder Phase Periodicity:</strong> HiFi-GAN and BigVGAN upsamplers introduce subtle 3.2-8.0 kHz spectral grids.
                       </span>
                     </li>
                     <li className="flex items-start gap-2">

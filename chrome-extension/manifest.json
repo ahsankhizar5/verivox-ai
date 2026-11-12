@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "VeriVox AI: Live Voice & Deepfake Detector",
+  "version": "2.1.0",
+  "description": "Verify live browser tab audio, microphone speech, and unseen voice clips in seconds with LIME Explainable AI attribution.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "VeriVox AI Voice Scanner",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabCapture"
+  ],
+  "host_permissions": [
+    "https://www.verivox.studio/*",
+    "https://verivox.studio/*",
+    "https://verivox-kappa.vercel.app/*"
+  ]
+}
