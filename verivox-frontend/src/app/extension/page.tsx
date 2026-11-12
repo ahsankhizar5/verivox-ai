@@ -98,9 +98,9 @@ export default function ExtensionStorePage() {
     setIsScanning(true);
     setStatusText('Normalizing to 16 kHz mono WAV & running LIME XAI attribution...');
     try {
-      const { wavBlob, features } = await convertBlobTo16kHzWav(blob, captureMode);
+      const { wavFile, features } = await convertBlobTo16kHzWav(blob, fileName, captureMode);
       const formData = new FormData();
-      formData.append('file', wavBlob, fileName.replace(/\.[^.]+$/, '.wav'));
+      formData.append('file', wavFile);
       formData.append('captureMode', captureMode);
       formData.append('clientFeatures', JSON.stringify(features));
 
