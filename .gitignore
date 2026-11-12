@@ -1,0 +1,34 @@
+# Secrets & Environments
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Dependencies & Virtual Environments
+node_modules/
+**/node_modules/
+.venv/
+**/.venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Build & Output Artifacts
+.next/
+**/.next/
+out/
+build/
+**/build/
+.gradle/
+**/.gradle/
+
+# Large Datasets & Temp Outputs
+LA/
+**/LA/
+exp_result/
+**/exp_result/
+*.zip
+lime_graph.png
+.agents/

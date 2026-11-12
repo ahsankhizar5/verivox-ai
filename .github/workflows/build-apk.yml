@@ -1,0 +1,49 @@
+name: Build & Release VeriVox Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-android-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.5'
+
+      - name: Build Release & Debug APK
+        working-directory: android-app
+        run: |
+          gradle assembleRelease
+          cp app/build/outputs/apk/release/app-release.apk ../VeriVox.apk
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: VeriVox-Android-APK
+          path: VeriVox.apk
+
+      - name: Publish APK to GitHub Releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete v2.0.0 --yes --cleanup-tag || true
+          gh release create v2.0.0 VeriVox.apk \
+            --title "VeriVox AI v2.0.0 (Android APK + Real-Time Voice Studio)" \
+            --notes "Installable Android APK for VeriVox Real-Time AI Voice Clone, Mimicry, Screen Audio & Deepfake Detection." \
+            --latest

@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    --font-inter: var(--font-sans);
+  }
+
+  body {
+    @apply bg-secondary-50 text-secondary-900 antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight text-secondary-950;
+  }
+
+  h1 {
+    @apply text-4xl lg:text-5xl;
+    letter-spacing: -0.03em;
+  }
+
+  h2 {
+    @apply text-3xl lg:text-4xl;
+    letter-spacing: -0.025em;
+  }
+
+  h3 {
+    @apply text-2xl lg:text-3xl;
+    letter-spacing: -0.02em;
+  }
+
+  h4 {
+    @apply text-xl lg:text-2xl;
+  }
+
+  h5 {
+    @apply text-lg lg:text-xl;
+  }
+
+  h6 {
+    @apply text-base lg:text-lg;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Precision architectural grid backgrounds */
+  .bg-grid-light {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(24, 24, 27, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(24, 24, 27, 0.04) 1px, transparent 1px);
+  }
+
+  .bg-grid-dark {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+
+  .font-mono-tabular {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
