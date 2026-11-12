@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
-import './globals.css';
+import '@/styles/globals.css';
 import { AuthProvider } from '@/lib/auth/AuthContext';
 import { ToastProvider } from '@/contexts/ToastContext';
 

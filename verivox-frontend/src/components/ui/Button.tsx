@@ -2,8 +2,8 @@ import React from 'react';
 import { Loader2 } from 'lucide-react';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'ghost' | 'outline';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   isLoading?: boolean;
   fullWidth?: boolean;
   children: React.ReactNode;
@@ -31,18 +31,23 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         'bg-gradient-to-r from-violet-600 via-purple-600 to-rose-500 text-white hover:brightness-110 focus-visible:ring-violet-500 shadow-sm shadow-violet-600/25',
       secondary:
         'bg-emerald-50 text-emerald-900 border border-emerald-200 hover:bg-emerald-100 focus-visible:ring-emerald-500',
+      success:
+        'bg-success-600 text-white hover:bg-success-700 focus-visible:ring-success-600 border border-success-700/20 shadow-soft',
+      danger:
+        'bg-danger-600 text-white hover:bg-danger-700 focus-visible:ring-danger-600 shadow-sm',
+      warning:
+        'bg-warning-500 text-secondary-950 hover:bg-warning-600 focus-visible:ring-warning-500 border border-warning-600/20 shadow-soft',
       outline:
         'border border-secondary-300 bg-white text-secondary-900 hover:bg-violet-50/40 hover:border-violet-400 focus-visible:ring-violet-500',
       ghost:
         'text-secondary-700 hover:bg-violet-50/60 hover:text-violet-700 focus-visible:ring-violet-500',
-      danger:
-        'bg-danger-600 text-white hover:bg-danger-700 focus-visible:ring-danger-600 shadow-sm',
     };
 
     const sizeStyles = {
-      sm: 'px-3.5 py-2 text-xs gap-1.5',
-      md: 'px-4 py-2.5 text-sm gap-2',
-      lg: 'px-6 py-3.5 text-base gap-2.5',
+      sm: 'px-3.5 py-2 text-xs gap-1.5 min-h-[34px]',
+      md: 'px-4 py-2.5 text-sm gap-2 min-h-[40px]',
+      lg: 'px-6 py-3.5 text-base gap-2.5 min-h-[46px]',
+      xl: 'px-6 py-3.5 sm:px-7 sm:py-4 text-base gap-3 min-h-[52px]',
     };
 
     const widthStyle = fullWidth ? 'w-full' : '';
