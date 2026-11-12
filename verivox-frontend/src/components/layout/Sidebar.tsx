@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 
 interface SidebarProps {
+  userRole?: 'free' | 'pro' | 'enterprise' | string;
   isOpen?: boolean;
   onClose?: () => void;
 }
