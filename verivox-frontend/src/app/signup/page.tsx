@@ -179,7 +179,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-[100dvh] grid grid-cols-1 lg:grid-cols-12 bg-white">
+    <div className="min-h-[100dvh] grid grid-cols-1 lg:grid-cols-12 bg-[#141210]">
       {/* Left Side: Dark Slate Brand Panel */}
       <div className="hidden lg:flex lg:col-span-6 bg-gradient-to-br from-[#0b0a09] via-[#161411] to-[#1c1917] text-white flex-col justify-between p-12 xl:p-16">
         <div className="flex items-center justify-between">
@@ -238,31 +238,31 @@ export default function SignupPage() {
       </div>
 
       {/* Right Side: Sign Up Form */}
-      <div className="lg:col-span-6 flex flex-col justify-between p-6 sm:p-10 xl:p-14 bg-secondary-50/40 overflow-y-auto">
+      <div className="lg:col-span-6 flex flex-col justify-between p-6 sm:p-10 xl:p-14 bg-[#12100e] overflow-y-auto">
         <div className="flex items-center justify-between">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-secondary-600 hover:text-primary-600 transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-stone-300 hover:text-amber-400 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Home
           </Link>
           <Link href="/" className="lg:hidden">
-            <BrandLogo darkText={true} />
+            <BrandLogo darkText={false} />
           </Link>
         </div>
 
         <div className="w-full max-w-md mx-auto my-auto py-6">
           <div className="mb-6">
-            <h2 className="text-2xl sm:text-3xl font-bold text-secondary-950 tracking-tight mb-1.5">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-1.5">
               Create your free account
             </h2>
-            <p className="text-sm text-secondary-600">
+            <p className="text-sm text-stone-300">
               Get instant access to the VeriVox audio detection studio.
             </p>
           </div>
 
-          <div className="p-6 sm:p-8 rounded-2xl bg-white border border-secondary-200 shadow-soft">
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#141210] border border-white/10 shadow-soft">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Input
@@ -343,7 +343,7 @@ export default function SignupPage() {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="text-secondary-400 hover:text-secondary-700 transition-colors"
+                      className="text-stone-400 hover:text-stone-300 transition-colors"
                       tabIndex={-1}
                     >
                       {showPassword ? (
@@ -364,11 +364,11 @@ export default function SignupPage() {
                           className={`h-1.5 flex-1 rounded-full transition-colors ${
                             level <= passwordStrength.score
                               ? passwordStrength.score <= 2
-                                ? 'bg-danger-500'
+                                ? 'bg-rose-500/150'
                                 : passwordStrength.score <= 3
                                 ? 'bg-warning-500'
-                                : 'bg-success-500'
-                              : 'bg-secondary-200'
+                                : 'bg-emerald-500/150'
+                              : 'bg-white/15'
                           }`}
                         />
                       ))}
@@ -377,8 +377,8 @@ export default function SignupPage() {
                       <div
                         className={`flex items-center gap-1.5 ${
                           passwordStrength.checks.length
-                            ? 'text-success-600'
-                            : 'text-secondary-400'
+                            ? 'text-emerald-400'
+                            : 'text-stone-400'
                         }`}
                       >
                         {passwordStrength.checks.length ? (
@@ -391,8 +391,8 @@ export default function SignupPage() {
                       <div
                         className={`flex items-center gap-1.5 ${
                           passwordStrength.checks.uppercase
-                            ? 'text-success-600'
-                            : 'text-secondary-400'
+                            ? 'text-emerald-400'
+                            : 'text-stone-400'
                         }`}
                       >
                         {passwordStrength.checks.uppercase ? (
@@ -405,8 +405,8 @@ export default function SignupPage() {
                       <div
                         className={`flex items-center gap-1.5 ${
                           passwordStrength.checks.number
-                            ? 'text-success-600'
-                            : 'text-secondary-400'
+                            ? 'text-emerald-400'
+                            : 'text-stone-400'
                         }`}
                       >
                         {passwordStrength.checks.number ? (
@@ -419,8 +419,8 @@ export default function SignupPage() {
                       <div
                         className={`flex items-center gap-1.5 ${
                           passwordStrength.checks.special
-                            ? 'text-success-600'
-                            : 'text-secondary-400'
+                            ? 'text-emerald-400'
+                            : 'text-stone-400'
                         }`}
                       >
                         {passwordStrength.checks.special ? (
@@ -457,7 +457,7 @@ export default function SignupPage() {
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="text-secondary-400 hover:text-secondary-700 transition-colors"
+                    className="text-stone-400 hover:text-stone-300 transition-colors"
                     tabIndex={-1}
                   >
                     {showConfirmPassword ? (
@@ -477,14 +477,14 @@ export default function SignupPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, agreeToTerms: e.target.checked })
                     }
-                    className="w-4 h-4 text-primary-600 border-secondary-300 rounded focus:ring-primary-600 cursor-pointer mt-0.5"
+                    className="w-4 h-4 text-amber-400 border-white/15 rounded focus:ring-primary-600 cursor-pointer mt-0.5"
                     required
                   />
-                  <span className="text-xs text-secondary-600 leading-relaxed">
+                  <span className="text-xs text-stone-300 leading-relaxed">
                     I agree to the{' '}
                     <Link
                       href="/terms"
-                      className="text-primary-600 font-semibold underline hover:text-primary-700"
+                      className="text-amber-400 font-semibold underline hover:text-amber-300"
                       target="_blank"
                     >
                       Terms of Use
@@ -492,7 +492,7 @@ export default function SignupPage() {
                     and{' '}
                     <Link
                       href="/privacy"
-                      className="text-primary-600 font-semibold underline hover:text-primary-700"
+                      className="text-amber-400 font-semibold underline hover:text-amber-300"
                       target="_blank"
                     >
                       Privacy Policy
@@ -520,11 +520,11 @@ export default function SignupPage() {
           </div>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-secondary-600">
+            <p className="text-sm text-stone-300">
               Already have an account?{' '}
               <Link
                 href="/login"
-                className="text-primary-600 font-semibold hover:text-primary-700 transition-colors"
+                className="text-amber-400 font-semibold hover:text-amber-300 transition-colors"
               >
                 Sign in
               </Link>
@@ -532,7 +532,7 @@ export default function SignupPage() {
           </div>
         </div>
 
-        <div className="text-center text-xs text-secondary-400">
+        <div className="text-center text-xs text-stone-400">
           VeriVox • verivox.studio
         </div>
       </div>

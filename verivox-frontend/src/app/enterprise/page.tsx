@@ -151,12 +151,11 @@ console.log(data.verdict, data.confidence, data.temporalSegments);`;
                   Test Live Enterprise API
                 </a>
                 <a
-                  href="/VeriVox-Extension.zip"
-                  download="VeriVox-Extension.zip"
+                  href="/extension"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-400/30 transition-all"
                 >
                   <Puzzle className="w-4 h-4" />
-                  Download Chrome/Edge Extension (.zip)
+                  Launch Chrome/Edge Extension
                 </a>
                 <a
                   href="/VeriVox.apk"
@@ -344,12 +343,11 @@ console.log(data.verdict, data.confidence, data.temporalSegments);`;
 
                 <div>
                   <a
-                    href="/VeriVox-Extension.zip"
-                    download="VeriVox-Extension.zip"
+                    href="/extension"
                     className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-stone-950 hover:brightness-110 transition-all"
                   >
                     <Puzzle className="w-4 h-4" />
-                    Download Browser Extension (.zip)
+                    Download Launch Browser Extension
                   </a>
                 </div>
               </div>

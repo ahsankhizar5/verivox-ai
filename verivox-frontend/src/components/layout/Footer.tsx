@@ -32,14 +32,13 @@ export const Footer: React.FC = () => {
                 <Smartphone className="w-3.5 h-3.5" />
                 <span>Android APK</span>
               </a>
-              <a
-                href="/VeriVox-Extension.zip"
-                download="VeriVox-Extension.zip"
+              <Link
+                href="/extension"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-stone-200 text-xs font-semibold transition-colors"
               >
                 <Puzzle className="w-3.5 h-3.5 text-amber-300" />
                 <span>Browser Extension</span>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -72,15 +71,20 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Company & Research */}
+          {/* Company & About Us (Moved to Footer per user request) */}
           <div className="md:col-span-2">
             <h3 className="text-xs font-mono font-semibold text-white uppercase tracking-wider mb-4">
               Company
             </h3>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/about" className="hover:text-amber-300 transition-colors">
-                  About VeriVox
+                <Link href="/about" className="text-amber-300 hover:text-amber-200 font-medium transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-amber-300 transition-colors">
+                  Contact Us
                 </Link>
               </li>
               <li>
@@ -91,11 +95,6 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/careers" className="hover:text-amber-300 transition-colors">
                   Join the Team
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-amber-300 transition-colors">
-                  Contact Us
                 </Link>
               </li>
             </ul>
@@ -118,14 +117,18 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href="/VeriVox-Extension.zip"
-                  download="VeriVox-Extension.zip"
+                <Link
+                  href="/extension"
                   className="inline-flex items-center gap-1 text-emerald-300 hover:text-emerald-200 font-medium transition-colors"
                 >
-                  <span>Chrome &amp; Edge Extension (.zip)</span>
+                  <span>Chrome &amp; Edge Extension Hub</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-amber-300 transition-colors">
+                  About VeriVox Studio
+                </Link>
               </li>
               <li>
                 <Link href="/privacy" className="hover:text-amber-300 transition-colors">

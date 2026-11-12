@@ -9,10 +9,10 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = 'default', padding = 'md', children, ...props }, ref) => {
     const variants = {
-      default: 'bg-white border border-secondary-200/90',
-      bordered: 'bg-white border border-secondary-300',
+      default: 'bg-[#151310] border border-white/10 text-stone-100',
+      bordered: 'bg-[#151310] border border-amber-500/25 text-stone-100',
       elevated:
-        'bg-white border border-secondary-200/80 shadow-soft hover:border-secondary-300 transition-colors duration-200',
+        'bg-[#171512] border border-white/10 shadow-xl hover:border-amber-500/30 text-stone-100 transition-colors duration-200',
     };
 
     const paddings = {
@@ -48,7 +48,7 @@ export const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttribut
   ({ className, ...props }, ref) => (
     <h3
       ref={ref}
-      className={cn('text-lg sm:text-xl font-semibold text-secondary-950 tracking-tight', className)}
+      className={cn('text-lg sm:text-xl font-semibold text-white tracking-tight', className)}
       {...props}
     />
   )
@@ -60,7 +60,7 @@ export const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn('text-sm text-secondary-600 mt-1', className)} {...props} />
+  <p ref={ref} className={cn('text-sm text-stone-300 mt-1', className)} {...props} />
 ));
 
 CardDescription.displayName = 'CardDescription';

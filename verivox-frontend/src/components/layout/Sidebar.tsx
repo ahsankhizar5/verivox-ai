@@ -46,8 +46,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
   return (
     <aside
       className={`
-        fixed lg:static inset-y-0 left-0 z-50
-        w-64 bg-[#0b0a09] text-white
+        fixed inset-y-0 left-0 z-50
+        w-64 h-[100dvh] bg-[#0b0a09] text-white
         transform transition-transform duration-200 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         flex flex-col border-r border-white/10
@@ -126,14 +126,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
           <Smartphone className="w-4 h-4 text-amber-400" />
           <span>Download Android APK</span>
         </a>
-        <a
-          href="/VeriVox-Extension.zip"
-          download="VeriVox-Extension.zip"
+        <Link
+          href="/extension"
+          onClick={handleLinkClick}
           className="flex items-center gap-3 px-3.5 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 text-xs font-semibold transition-colors border border-emerald-400/30"
         >
           <Puzzle className="w-4 h-4 text-emerald-400" />
-          <span>Browser Extension (.zip)</span>
-        </a>
+          <span>Launch Browser Extension</span>
+        </Link>
         <button
           onClick={() => {
             handleLinkClick();

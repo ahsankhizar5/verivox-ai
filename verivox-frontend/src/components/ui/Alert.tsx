@@ -15,10 +15,10 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     ref
   ) => {
     const variants = {
-      info: 'bg-blue-50 border-blue-200 text-blue-800',
-      success: 'bg-success-50 border-success-200 text-success-800',
-      warning: 'bg-warning-50 border-warning-200 text-warning-800',
-      danger: 'bg-danger-50 border-danger-200 text-danger-800',
+      info: 'bg-amber-500/15 border-amber-400/30 text-amber-200',
+      success: 'bg-emerald-500/15 border-emerald-400/30 text-emerald-200',
+      warning: 'bg-amber-500/15 border-amber-400/30 text-amber-200',
+      danger: 'bg-rose-500/15 border-rose-400/30 text-rose-200',
     };
 
     return (
@@ -26,7 +26,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         ref={ref}
         role="alert"
         className={cn(
-          'relative rounded-lg border p-4',
+          'relative rounded-xl border p-4',
           variants[variant],
           className
         )}
@@ -42,7 +42,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
           {dismissible && (
             <button
               onClick={onDismiss}
-              className="ml-4 -mt-1 -mr-1 p-1 rounded-md hover:bg-black/5 transition-colors"
+              className="ml-4 -mt-1 -mr-1 p-1 rounded-md hover:bg-white/10 transition-colors"
               aria-label="Dismiss"
             >
               <X className="w-4 h-4" />

@@ -80,8 +80,7 @@ export default function HomePage() {
                   Android APK (2.3 MB)
                 </a>
                 <a
-                  href="/VeriVox-Extension.zip"
-                  download="VeriVox-Extension.zip"
+                  href="/extension"
                   className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-sm bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-400/30 transition-all"
                 >
                   <Puzzle className="w-4 h-4" />
@@ -197,12 +196,11 @@ export default function HomePage() {
                     Download Android APK
                   </a>
                   <a
-                    href="/VeriVox-Extension.zip"
-                    download="VeriVox-Extension.zip"
+                    href="/extension"
                     className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl font-bold text-sm bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-400/30 transition-all"
                   >
                     <Puzzle className="w-4 h-4" />
-                    Browser Extension (.zip)
+                    Launch Browser Extension
                   </a>
                   <Link
                     href="/login"

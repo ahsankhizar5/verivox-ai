@@ -37,26 +37,26 @@ export default function ReportsPage() {
 
   if (loading) {
     return (
-      <div className="p-8 flex items-center justify-center min-h-screen bg-secondary-50">
+      <div className="p-8 flex items-center justify-center min-h-screen bg-[#0b0a09]">
         <Loading text="Loading PDF reports..." />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-secondary-50">
+    <div className="min-h-screen bg-[#0b0a09]">
       {/* Header */}
-      <div className="bg-white border-b border-secondary-200/80">
+      <div className="bg-[#141210] border-b border-white/10">
         <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-primary-600 font-semibold mb-1">
-              <FileText className="w-3.5 h-3.5 text-primary-600" />
+            <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-amber-400 font-semibold mb-1">
+              <FileText className="w-3.5 h-3.5 text-amber-400" />
               EXPORT ARCHIVE
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-secondary-950 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               PDF Verification Reports
             </h1>
-            <p className="text-sm text-secondary-600 mt-0.5">
+            <p className="text-sm text-stone-300 mt-0.5">
               Open any verified recording below to download a formatted A4 PDF report with visual heatmaps.
             </p>
           </div>
@@ -69,29 +69,29 @@ export default function ReportsPage() {
       <div className="p-4 sm:p-6 lg:px-8 max-w-6xl mx-auto">
         {detections.length > 0 ? (
           <Card variant="default" padding="none" className="overflow-hidden">
-            <div className="px-6 py-3.5 border-b border-secondary-200/80 bg-primary-50/30 flex items-center justify-between">
-              <span className="font-mono text-xs uppercase tracking-wider text-secondary-500">
+            <div className="px-6 py-3.5 border-b border-white/10 bg-amber-500/10 flex items-center justify-between">
+              <span className="font-mono text-xs uppercase tracking-wider text-stone-400">
                 VERIFIED AUDIO RECORD
               </span>
-              <span className="font-mono text-xs uppercase tracking-wider text-secondary-500">
+              <span className="font-mono text-xs uppercase tracking-wider text-stone-400">
                 REPORT ACTION
               </span>
             </div>
-            <div className="divide-y divide-secondary-200/70">
+            <div className="divide-y divide-white/10">
               {detections.map((item) => {
                 const isBonafide = item.result === 'bona_fide';
                 const hasXai = Boolean(item.analysis?.explanation || item.analysis?.spectrogramUrl);
                 return (
                   <div
                     key={item._id}
-                    className="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-primary-50/40 transition-colors"
+                    className="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-amber-500/10 transition-colors"
                   >
                     <div className="flex items-start sm:items-center gap-4 min-w-0">
                       <div
                         className={`w-10 h-10 rounded-xl border flex items-center justify-center flex-shrink-0 ${
                           isBonafide
-                            ? 'bg-success-50 border-success-200 text-success-600'
-                            : 'bg-danger-50 border-danger-200 text-danger-600'
+                            ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400'
+                            : 'bg-rose-500/15 border-rose-500/30 text-rose-400'
                         }`}
                       >
                         {isBonafide ? (
@@ -103,7 +103,7 @@ export default function ReportsPage() {
 
                       <div className="min-w-0">
                         <div className="flex items-center gap-2.5 flex-wrap">
-                          <h3 className="text-sm sm:text-base font-semibold text-secondary-950 truncate">
+                          <h3 className="text-sm sm:text-base font-semibold text-white truncate">
                             {item.fileName}
                           </h3>
                           <Badge variant={isBonafide ? 'success' : 'danger'} size="sm">
@@ -115,7 +115,7 @@ export default function ReportsPage() {
                             </Badge>
                           )}
                         </div>
-                        <div className="flex items-center gap-3 text-xs font-mono text-secondary-500 mt-1">
+                        <div className="flex items-center gap-3 text-xs font-mono text-stone-400 mt-1">
                           <span className="inline-flex items-center gap-1">
                             <Calendar className="w-3.5 h-3.5" />
                             {new Date(item.createdAt).toLocaleDateString('en-US', {
@@ -149,13 +149,13 @@ export default function ReportsPage() {
         ) : (
           <Card variant="default" padding="lg">
             <div className="text-center py-14">
-              <div className="w-12 h-12 bg-primary-50 border border-primary-200 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <FileText className="w-6 h-6 text-primary-600" />
+              <div className="w-12 h-12 bg-amber-500/15 border border-amber-500/30 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <FileText className="w-6 h-6 text-amber-400" />
               </div>
-              <h3 className="text-lg font-bold text-secondary-950 mb-1">
+              <h3 className="text-lg font-bold text-white mb-1">
                 No completed reports yet
               </h3>
-              <p className="text-sm text-secondary-600 mb-6 max-w-md mx-auto">
+              <p className="text-sm text-stone-300 mb-6 max-w-md mx-auto">
                 Scan an audio recording first. Every completed scan automatically unlocks A4 PDF report downloads.
               </p>
               <Link href="/dashboard/upload">

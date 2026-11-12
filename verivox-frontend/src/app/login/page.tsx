@@ -92,7 +92,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[100dvh] grid grid-cols-1 lg:grid-cols-12 bg-white">
+    <div className="min-h-[100dvh] grid grid-cols-1 lg:grid-cols-12 bg-[#141210]">
       {/* Left Side: Dark Studio Brand Panel */}
       <div className="hidden lg:flex lg:col-span-6 bg-[#0b0a09] text-white flex-col justify-between p-12 xl:p-16 border-r border-stone-800">
         <div className="flex items-center justify-between">
@@ -151,26 +151,26 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side: Sign In Form */}
-      <div className="lg:col-span-6 flex flex-col justify-between p-6 sm:p-12 xl:p-16 bg-secondary-50/40">
+      <div className="lg:col-span-6 flex flex-col justify-between p-6 sm:p-12 xl:p-16 bg-[#12100e]">
         <div className="flex items-center justify-between">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-secondary-600 hover:text-secondary-950 transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-stone-300 hover:text-white transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Home
           </Link>
           <Link href="/" className="lg:hidden">
-            <BrandLogo darkText={true} />
+            <BrandLogo darkText={false} />
           </Link>
         </div>
 
         <div className="w-full max-w-md mx-auto my-auto py-8">
           <div className="mb-6">
-            <h2 className="text-3xl font-bold text-secondary-950 tracking-tight mb-2">
+            <h2 className="text-3xl font-bold text-white tracking-tight mb-2">
               Welcome back
             </h2>
-            <p className="text-sm text-secondary-600">
+            <p className="text-sm text-stone-300">
               Sign in to your VeriVox studio account or use 1-Click Judge Demo Access.
             </p>
           </div>
@@ -201,14 +201,14 @@ export default function LoginPage() {
           </div>
 
           <div className="relative flex py-2 items-center mb-5">
-            <div className="flex-grow border-t border-secondary-200" />
-            <span className="flex-shrink mx-3 text-xs font-mono uppercase text-secondary-400">
+            <div className="flex-grow border-t border-white/10" />
+            <span className="flex-shrink mx-3 text-xs font-mono uppercase text-stone-400">
               or sign in with email
             </span>
-            <div className="flex-grow border-t border-secondary-200" />
+            <div className="flex-grow border-t border-white/10" />
           </div>
 
-          <div className="p-6 sm:p-8 rounded-2xl bg-white border border-secondary-200 shadow-soft">
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#141210] border border-white/10 shadow-soft">
             <form onSubmit={handleSubmit} className="space-y-5">
               <Input
                 label="Email Address"
@@ -245,7 +245,7 @@ export default function LoginPage() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="text-secondary-400 hover:text-secondary-700 transition-colors"
+                    className="text-stone-400 hover:text-stone-300 transition-colors"
                     tabIndex={-1}
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
@@ -266,13 +266,13 @@ export default function LoginPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, rememberMe: e.target.checked })
                     }
-                    className="w-4 h-4 text-primary-600 border-secondary-300 rounded focus:ring-primary-600 cursor-pointer"
+                    className="w-4 h-4 text-amber-400 border-white/15 rounded focus:ring-primary-600 cursor-pointer"
                   />
-                  <span className="text-xs text-secondary-600">Keep me signed in</span>
+                  <span className="text-xs text-stone-300">Keep me signed in</span>
                 </label>
                 <Link
                   href="/contact"
-                  className="text-xs font-semibold text-primary-600 hover:text-primary-700"
+                  className="text-xs font-semibold text-amber-400 hover:text-amber-300"
                 >
                   Need help?
                 </Link>
@@ -296,11 +296,11 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-secondary-600">
+            <p className="text-sm text-stone-300">
               Don&apos;t have an account yet?{' '}
               <Link
                 href="/signup"
-                className="text-primary-600 font-semibold hover:text-primary-700 transition-colors"
+                className="text-amber-400 font-semibold hover:text-amber-300 transition-colors"
               >
                 Create free account
               </Link>
@@ -308,7 +308,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div className="text-center text-xs text-secondary-400">
+        <div className="text-center text-xs text-stone-400">
           50 free audio scans daily • verivox.studio
         </div>
       </div>

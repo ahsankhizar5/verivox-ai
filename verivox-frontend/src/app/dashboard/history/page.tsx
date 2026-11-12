@@ -58,19 +58,19 @@ export default function HistoryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-secondary-50">
+    <div className="min-h-screen bg-[#0b0a09]">
       {/* Header */}
-      <div className="bg-white border-b border-secondary-200/80">
+      <div className="bg-[#141210] border-b border-white/10">
         <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-primary-600 font-semibold mb-1">
-              <Activity className="w-3.5 h-3.5 text-primary-600" />
+            <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-amber-400 font-semibold mb-1">
+              <Activity className="w-3.5 h-3.5 text-amber-400" />
               SCAN ARCHIVE
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-secondary-950 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               Detection History
             </h1>
-            <p className="text-sm text-secondary-600 mt-0.5">
+            <p className="text-sm text-stone-300 mt-0.5">
               Review past voice verifications, confidence scores, and downloadable reports.
             </p>
           </div>
@@ -89,47 +89,47 @@ export default function HistoryPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Card variant="default" padding="md">
               <div className="flex items-center justify-between mb-3">
-                <span className="font-mono text-[11px] uppercase tracking-wider text-secondary-500">
+                <span className="font-mono text-[11px] uppercase tracking-wider text-stone-400">
                   SCANS IN VIEW
                 </span>
-                <div className="w-8 h-8 rounded-lg bg-primary-50 border border-primary-200 flex items-center justify-center">
-                  <FileAudio className="w-4 h-4 text-primary-600" />
+                <div className="w-8 h-8 rounded-lg bg-amber-500/15 border border-amber-500/30 flex items-center justify-center">
+                  <FileAudio className="w-4 h-4 text-amber-400" />
                 </div>
               </div>
-              <div className="font-mono text-2xl sm:text-3xl font-bold text-secondary-950 tabular-nums">
+              <div className="font-mono text-2xl sm:text-3xl font-bold text-white tabular-nums">
                 {stats.total}
               </div>
-              <p className="text-xs text-secondary-500 mt-1">Records loaded on this page</p>
+              <p className="text-xs text-stone-400 mt-1">Records loaded on this page</p>
             </Card>
 
             <Card variant="default" padding="md">
               <div className="flex items-center justify-between mb-3">
-                <span className="font-mono text-[11px] uppercase tracking-wider text-secondary-500">
+                <span className="font-mono text-[11px] uppercase tracking-wider text-stone-400">
                   AUTHENTIC (HUMAN)
                 </span>
-                <div className="w-8 h-8 rounded-lg bg-success-50 border border-success-200 flex items-center justify-center">
-                  <CheckCircle className="w-4 h-4 text-success-600" />
+                <div className="w-8 h-8 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center">
+                  <CheckCircle className="w-4 h-4 text-emerald-400" />
                 </div>
               </div>
-              <div className="font-mono text-2xl sm:text-3xl font-bold text-success-700 tabular-nums">
+              <div className="font-mono text-2xl sm:text-3xl font-bold text-emerald-300 tabular-nums">
                 {stats.authentic}
               </div>
-              <p className="text-xs text-secondary-500 mt-1">Verified real human recordings</p>
+              <p className="text-xs text-stone-400 mt-1">Verified real human recordings</p>
             </Card>
 
             <Card variant="default" padding="md">
               <div className="flex items-center justify-between mb-3">
-                <span className="font-mono text-[11px] uppercase tracking-wider text-secondary-500">
+                <span className="font-mono text-[11px] uppercase tracking-wider text-stone-400">
                   DEEPFAKES FLAGGED
                 </span>
-                <div className="w-8 h-8 rounded-lg bg-danger-50 border border-danger-200 flex items-center justify-center">
-                  <XCircle className="w-4 h-4 text-danger-600" />
+                <div className="w-8 h-8 rounded-lg bg-rose-500/15 border border-rose-500/30 flex items-center justify-center">
+                  <XCircle className="w-4 h-4 text-rose-400" />
                 </div>
               </div>
-              <div className="font-mono text-2xl sm:text-3xl font-bold text-danger-700 tabular-nums">
+              <div className="font-mono text-2xl sm:text-3xl font-bold text-rose-300 tabular-nums">
                 {stats.spoofs}
               </div>
-              <p className="text-xs text-secondary-500 mt-1">Flagged synthetic or cloned audio</p>
+              <p className="text-xs text-stone-400 mt-1">Flagged synthetic or cloned audio</p>
             </Card>
           </div>
         )}
@@ -172,30 +172,30 @@ export default function HistoryPage() {
           </Card>
         ) : filteredDetections.length > 0 ? (
           <Card variant="default" padding="none" className="overflow-hidden">
-            <div className="px-6 py-3.5 border-b border-secondary-200/80 bg-primary-50/30 flex items-center justify-between">
-              <span className="font-mono text-xs uppercase tracking-wider text-secondary-500">
+            <div className="px-6 py-3.5 border-b border-white/10 bg-amber-500/10 flex items-center justify-between">
+              <span className="font-mono text-xs uppercase tracking-wider text-stone-400">
                 AUDIO RECORDING
               </span>
-              <span className="font-mono text-xs uppercase tracking-wider text-secondary-500">
+              <span className="font-mono text-xs uppercase tracking-wider text-stone-400">
                 VERDICT &amp; CONFIDENCE
               </span>
             </div>
-            <div className="divide-y divide-secondary-200/70">
+            <div className="divide-y divide-white/10">
               {filteredDetections.map((detection) => {
                 const isBonafide = detection.result === 'bona_fide';
                 return (
                   <Link
                     key={detection._id}
                     href={`/dashboard/results/${detection._id}`}
-                    className="block px-6 py-4 hover:bg-primary-50/40 transition-colors group"
+                    className="block px-6 py-4 hover:bg-amber-500/10 transition-colors group"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="flex items-start sm:items-center gap-4 min-w-0">
                         <div
                           className={`w-10 h-10 rounded-xl border flex items-center justify-center flex-shrink-0 ${
                             isBonafide
-                              ? 'bg-success-50 border-success-200 text-success-600'
-                              : 'bg-danger-50 border-danger-200 text-danger-600'
+                              ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400'
+                              : 'bg-rose-500/15 border-rose-500/30 text-rose-400'
                           }`}
                         >
                           {isBonafide ? (
@@ -206,10 +206,10 @@ export default function HistoryPage() {
                         </div>
 
                         <div className="min-w-0">
-                          <h3 className="text-sm sm:text-base font-semibold text-secondary-950 truncate group-hover:text-primary-600 transition-colors">
+                          <h3 className="text-sm sm:text-base font-semibold text-white truncate group-hover:text-amber-400 transition-colors">
                             {detection.fileName}
                           </h3>
-                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono text-secondary-500 mt-1">
+                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono text-stone-400 mt-1">
                             <span className="inline-flex items-center gap-1">
                               <Clock className="w-3.5 h-3.5" />
                               {new Date(detection.createdAt).toLocaleString('en-US', {
@@ -237,11 +237,11 @@ export default function HistoryPage() {
                           <Badge variant={isBonafide ? 'success' : 'danger'} size="sm">
                             {isBonafide ? 'AUTHENTIC' : 'DEEPFAKE'}
                           </Badge>
-                          <div className="font-mono text-xs text-secondary-600 mt-1 tabular-nums">
+                          <div className="font-mono text-xs text-stone-300 mt-1 tabular-nums">
                             {(detection.confidence * 100).toFixed(2)}% conf
                           </div>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-secondary-400 group-hover:text-primary-600 group-hover:translate-x-0.5 transition-all" />
+                        <ArrowRight className="w-4 h-4 text-stone-400 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all" />
                       </div>
                     </div>
                   </Link>
@@ -252,13 +252,13 @@ export default function HistoryPage() {
         ) : (
           <Card variant="default" padding="lg">
             <div className="text-center py-14">
-              <div className="w-12 h-12 bg-primary-50 border border-primary-200 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <FileAudio className="w-6 h-6 text-primary-600" />
+              <div className="w-12 h-12 bg-amber-500/15 border border-amber-500/30 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <FileAudio className="w-6 h-6 text-amber-400" />
               </div>
-              <h3 className="text-lg font-bold text-secondary-950 mb-1">
+              <h3 className="text-lg font-bold text-white mb-1">
                 No matching scans found
               </h3>
-              <p className="text-sm text-secondary-600 mb-6 max-w-md mx-auto">
+              <p className="text-sm text-stone-300 mb-6 max-w-md mx-auto">
                 {searchTerm || filter
                   ? 'Try adjusting your search or filter criteria.'
                   : 'Upload an audio recording to run your first deepfake detection scan.'}
@@ -277,7 +277,7 @@ export default function HistoryPage() {
         {totalPages > 1 && (
           <Card variant="default" padding="md">
             <div className="flex justify-between items-center gap-2">
-              <span className="font-mono text-xs text-secondary-500">
+              <span className="font-mono text-xs text-stone-400">
                 PAGE {page} OF {totalPages}
               </span>
               <div className="flex items-center gap-1.5">

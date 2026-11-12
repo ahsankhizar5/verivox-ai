@@ -71,22 +71,22 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-[100dvh] flex flex-col bg-white text-secondary-900">
+    <div className="min-h-[100dvh] flex flex-col bg-[#141210] text-stone-100">
       <Navbar />
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="border-b border-primary-100 bg-gradient-to-b from-primary-50/70 via-white to-white py-14 sm:py-20">
+        <section className="border-b border-amber-500/20 bg-gradient-to-b from-[#141210] via-[#0e0d0b] to-[#0b0a09] py-14 sm:py-20">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-50 border border-primary-200 text-xs font-semibold text-primary-700 mb-5">
-                <Sparkles className="w-3.5 h-3.5 text-primary-600" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-xs font-semibold text-amber-300 mb-5">
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                 <span>About VeriVox</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl font-bold text-secondary-950 tracking-tight mb-5">
+              <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-5">
                 Software built to make audio verification fast, visual, and trustworthy.
               </h1>
-              <p className="text-base sm:text-lg text-secondary-600 leading-relaxed">
+              <p className="text-base sm:text-lg text-stone-300 leading-relaxed">
                 As AI voice cloning becomes effortless, teams need a simple way to check if a recording is real. VeriVox turns complex audio analysis into an easy web studio anyone can use in seconds.
               </p>
             </div>
@@ -94,13 +94,13 @@ export default function AboutPage() {
         </section>
 
         {/* Product Capabilities */}
-        <section className="py-16 sm:py-20 bg-white border-b border-secondary-200/70">
+        <section className="py-16 sm:py-20 bg-[#141210] border-b border-white/10">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="max-w-2xl mb-12">
               <Badge variant="primary" size="md" className="mb-3">
                 What Makes Us Different
               </Badge>
-              <h2 className="text-3xl font-bold text-secondary-950 tracking-tight">
+              <h2 className="text-3xl font-bold text-white tracking-tight">
                 Clear visual answers instead of black box guesses
               </h2>
             </div>
@@ -111,15 +111,15 @@ export default function AboutPage() {
                 return (
                   <div
                     key={idx}
-                    className="p-7 rounded-2xl bg-secondary-50/60 border border-secondary-200/90 hover:border-primary-300 transition-colors"
+                    className="p-7 rounded-2xl bg-[#12100e] border border-white/10 hover:border-primary-300 transition-colors"
                   >
                     <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary-600 to-emerald-500 text-white flex items-center justify-center mb-5 shadow-sm">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <h3 className="text-xl font-bold text-secondary-950 mb-2">
+                    <h3 className="text-xl font-bold text-white mb-2">
                       {pillar.title}
                     </h3>
-                    <p className="text-sm text-secondary-600 leading-relaxed">
+                    <p className="text-sm text-stone-300 leading-relaxed">
                       {pillar.description}
                     </p>
                   </div>
@@ -130,13 +130,13 @@ export default function AboutPage() {
         </section>
 
         {/* Product Roadmap */}
-        <section className="py-16 sm:py-20 bg-secondary-50/60 border-b border-secondary-200/70">
+        <section className="py-16 sm:py-20 bg-[#12100e] border-b border-white/10">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="max-w-2xl mb-12">
               <Badge variant="primary" size="md" className="mb-3">
                 Product Journey
               </Badge>
-              <h2 className="text-3xl font-bold text-secondary-950 tracking-tight">
+              <h2 className="text-3xl font-bold text-white tracking-tight">
                 What is live today and what is coming next
               </h2>
             </div>
@@ -145,11 +145,11 @@ export default function AboutPage() {
               {roadmap.map((item) => (
                 <div
                   key={item.phase}
-                  className="p-6 rounded-2xl bg-white border border-secondary-200 shadow-soft flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-[#141210] border border-white/10 shadow-soft flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-4">
-                      <span className="text-xs font-bold text-primary-600">
+                      <span className="text-xs font-bold text-amber-400">
                         {item.phase}
                       </span>
                       <Badge
@@ -165,10 +165,10 @@ export default function AboutPage() {
                         {item.status}
                       </Badge>
                     </div>
-                    <h3 className="text-base font-bold text-secondary-950 mb-2">
+                    <h3 className="text-base font-bold text-white mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-secondary-600 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-stone-300 leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -179,7 +179,7 @@ export default function AboutPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-16 sm:py-20 bg-white">
+        <section className="py-16 sm:py-20 bg-[#141210]">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="rounded-3xl bg-gradient-to-r from-[#0b0a09] via-[#161411] to-[#1c1917] text-white p-8 sm:p-12 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 shadow-xl">
               <div className="max-w-xl">
@@ -195,7 +195,7 @@ export default function AboutPage() {
                   <Button
                     variant="secondary"
                     size="lg"
-                    className="bg-white text-primary-700 hover:bg-emerald-50 font-bold w-full sm:w-auto"
+                    className="bg-[#141210] text-amber-300 hover:bg-emerald-50 font-bold w-full sm:w-auto"
                   >
                     Try Free Now
                     <ArrowRight className="w-4 h-4" />

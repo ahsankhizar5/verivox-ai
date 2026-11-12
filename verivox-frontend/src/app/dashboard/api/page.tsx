@@ -85,28 +85,27 @@ console.log(await res.json());`;
   };
 
   return (
-    <div className="min-h-[100dvh] bg-secondary-50">
-      <div className="bg-white border-b border-secondary-200">
+    <div className="min-h-[100dvh] bg-[#0b0a09]">
+      <div className="bg-[#141210] border-b border-white/10">
         <div className="px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="font-mono text-xs text-primary-600 uppercase tracking-wider mb-1 font-semibold">
+            <div className="font-mono text-xs text-amber-400 uppercase tracking-wider mb-1 font-semibold">
               ENTERPRISE API &amp; EXTENSION HUB
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-secondary-950 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               REST API Keys, Sandbox &amp; Browser Extension
             </h1>
-            <p className="text-sm text-secondary-600 mt-0.5">
+            <p className="text-sm text-stone-300 mt-0.5">
               Integrate `POST /api/v1/verify` into your applications or download the Chrome Extension and Android APK.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
             <a
-              href="/VeriVox-Extension.zip"
-              download="VeriVox-Extension.zip"
+              href="/extension"
               className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-secondary-950 text-amber-300 font-bold text-xs border border-amber-500/30 hover:bg-secondary-900"
             >
               <Puzzle className="w-4 h-4" />
-              Chrome Extension (.zip)
+              Launch Chrome Extension
             </a>
             <a
               href="/VeriVox.apk"
@@ -127,8 +126,8 @@ console.log(await res.json());`;
             <Card variant="default" padding="lg">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <Key className="w-5 h-5 text-primary-600" />
-                  <h3 className="font-bold text-base text-secondary-950">
+                  <Key className="w-5 h-5 text-amber-400" />
+                  <h3 className="font-bold text-base text-white">
                     Active Enterprise API Key
                   </h3>
                 </div>
@@ -153,7 +152,7 @@ console.log(await res.json());`;
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono text-secondary-500">
+                <span className="text-xs font-mono text-stone-400">
                   Endpoint: POST /api/v1/verify
                 </span>
                 <Button variant="outline" size="sm" onClick={regenerateKey}>
@@ -166,8 +165,8 @@ console.log(await res.json());`;
             <Card variant="default" padding="lg">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <Terminal className="w-5 h-5 text-primary-600" />
-                  <h3 className="font-bold text-base text-secondary-950">
+                  <Terminal className="w-5 h-5 text-amber-400" />
+                  <h3 className="font-bold text-base text-white">
                     Quickstart Integration Code
                   </h3>
                 </div>
@@ -180,7 +179,7 @@ console.log(await res.json());`;
                       className={`px-2.5 py-1 rounded-lg font-mono text-xs font-bold uppercase ${
                         activeLang === lang
                           ? 'bg-secondary-950 text-amber-300'
-                          : 'bg-secondary-100 text-secondary-700'
+                          : 'bg-white/10 text-stone-300'
                       }`}
                     >
                       {lang}
@@ -213,10 +212,10 @@ console.log(await res.json());`;
             <Card variant="default" padding="lg">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="font-bold text-base text-secondary-950">
+                  <h3 className="font-bold text-base text-white">
                     Live `/api/v1/verify` Sandbox Tester
                   </h3>
-                  <p className="text-xs text-secondary-600">
+                  <p className="text-xs text-stone-300">
                     Execute a real request against the enterprise endpoint and inspect the LIME XAI response.
                   </p>
                 </div>
@@ -238,7 +237,7 @@ console.log(await res.json());`;
                     className={`px-3 py-2 rounded-xl font-mono text-xs font-bold border transition-all ${
                       selectedPreset === item.id
                         ? 'bg-secondary-950 text-amber-300 border-secondary-950'
-                        : 'bg-secondary-50 text-secondary-700 border-secondary-200'
+                        : 'bg-[#0b0a09] text-stone-300 border-white/10'
                     }`}
                   >
                     {item.label}

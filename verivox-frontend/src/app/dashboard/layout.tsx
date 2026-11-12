@@ -31,10 +31,10 @@ export default function DashboardLayout({
 
   if (isLoading && !showContent) {
     return (
-      <div className="flex items-center justify-center min-h-[100dvh] bg-secondary-50">
+      <div className="flex items-center justify-center min-h-[100dvh] bg-[#0b0a09]">
         <div className="text-center">
           <Spinner size="lg" />
-          <p className="mt-4 font-mono text-xs uppercase tracking-wider text-secondary-500">
+          <p className="mt-4 font-mono text-xs uppercase tracking-wider text-amber-300">
             Loading Workspace...
           </p>
         </div>
@@ -45,31 +45,41 @@ export default function DashboardLayout({
   const userRole = user?.role || 'free';
 
   return (
-    <div className="min-h-[100dvh] bg-secondary-50 text-secondary-900">
+    <div className="min-h-[100dvh] bg-[#0b0a09] text-stone-100">
       <Sidebar
         userRole={userRole as any}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />
 
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Mobile Header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#0b0a09] text-white border-b border-white/10 flex items-center justify-between px-4 z-30">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors text-slate-200"
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors text-stone-200"
             aria-label="Open navigation menu"
           >
             <Menu className="w-5 h-5" />
           </button>
           <BrandLogo darkText={false} />
         </div>
-        <span className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300">
+        <span className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300">
           CONSOLE
         </span>
       </div>
 
-      <main className="lg:ml-64 min-h-[100dvh] pt-16 lg:pt-0">{children}</main>
+      <main className="lg:pl-64 min-h-[100dvh] pt-16 lg:pt-0 bg-[#0b0a09]">
+        {children}
+      </main>
     </div>
   );
 }

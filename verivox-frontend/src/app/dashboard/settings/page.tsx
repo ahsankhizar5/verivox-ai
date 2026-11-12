@@ -184,18 +184,18 @@ export default function SettingsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-secondary-50">
+    <div className="min-h-screen bg-[#0b0a09]">
       {/* Header */}
-      <div className="bg-white border-b border-secondary-200/80">
+      <div className="bg-[#141210] border-b border-white/10">
         <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-5xl mx-auto">
-          <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-primary-600 font-semibold mb-1">
-            <Sliders className="w-3.5 h-3.5 text-primary-600" />
+          <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-amber-400 font-semibold mb-1">
+            <Sliders className="w-3.5 h-3.5 text-amber-400" />
             ACCOUNT PREFERENCES
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-secondary-950 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
             Account Settings
           </h1>
-          <p className="text-sm text-secondary-600 mt-0.5">
+          <p className="text-sm text-stone-300 mt-0.5">
             Manage your profile details, password, email notifications, and account data.
           </p>
         </div>
@@ -203,7 +203,7 @@ export default function SettingsPage() {
 
       <div className="p-4 sm:p-6 lg:p-8 max-w-5xl mx-auto">
         {/* Tabs */}
-        <div className="mb-6 border-b border-secondary-200">
+        <div className="mb-6 border-b border-white/10">
           <div className="flex gap-1 overflow-x-auto">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -214,8 +214,8 @@ export default function SettingsPage() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center gap-2 px-4 py-3 font-medium text-xs sm:text-sm border-b-2 transition-colors whitespace-nowrap ${
                     isActive
-                      ? 'border-primary-600 text-primary-600 font-semibold'
-                      : 'border-transparent text-secondary-500 hover:text-secondary-900 hover:border-secondary-300'
+                      ? 'border-amber-400 text-amber-400 font-semibold'
+                      : 'border-transparent text-stone-400 hover:text-stone-100 hover:border-white/15'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -229,10 +229,10 @@ export default function SettingsPage() {
         {/* Profile Tab */}
         {activeTab === 'profile' && (
           <Card variant="default" padding="none" className="overflow-hidden">
-            <div className="px-6 py-4 border-b border-secondary-200/80 bg-primary-50/30 flex items-center justify-between">
+            <div className="px-6 py-4 border-b border-white/10 bg-amber-500/10 flex items-center justify-between">
               <div>
-                <h2 className="text-base font-bold text-secondary-950">Personal Details</h2>
-                <p className="text-xs text-secondary-600">
+                <h2 className="text-base font-bold text-white">Personal Details</h2>
+                <p className="text-xs text-stone-300">
                   Update your name and primary email address.
                 </p>
               </div>
@@ -299,10 +299,10 @@ export default function SettingsPage() {
         {/* Security Tab */}
         {activeTab === 'security' && (
           <Card variant="default" padding="none" className="overflow-hidden">
-            <div className="px-6 py-4 border-b border-secondary-200/80 bg-primary-50/30 flex items-center justify-between">
+            <div className="px-6 py-4 border-b border-white/10 bg-amber-500/10 flex items-center justify-between">
               <div>
-                <h2 className="text-base font-bold text-secondary-950">Change Password</h2>
-                <p className="text-xs text-secondary-600">
+                <h2 className="text-base font-bold text-white">Change Password</h2>
+                <p className="text-xs text-stone-300">
                   Update your account password.
                 </p>
               </div>
@@ -321,7 +321,7 @@ export default function SettingsPage() {
                     <button
                       type="button"
                       onClick={() => setShowPasswords({ ...showPasswords, current: !showPasswords.current })}
-                      className="text-secondary-400 hover:text-secondary-700 transition-colors"
+                      className="text-stone-400 hover:text-stone-300 transition-colors"
                     >
                       {showPasswords.current ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -340,7 +340,7 @@ export default function SettingsPage() {
                     <button
                       type="button"
                       onClick={() => setShowPasswords({ ...showPasswords, new: !showPasswords.new })}
-                      className="text-secondary-400 hover:text-secondary-700 transition-colors"
+                      className="text-stone-400 hover:text-stone-300 transition-colors"
                     >
                       {showPasswords.new ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -358,7 +358,7 @@ export default function SettingsPage() {
                     <button
                       type="button"
                       onClick={() => setShowPasswords({ ...showPasswords, confirm: !showPasswords.confirm })}
-                      className="text-secondary-400 hover:text-secondary-700 transition-colors"
+                      className="text-stone-400 hover:text-stone-300 transition-colors"
                     >
                       {showPasswords.confirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -390,30 +390,30 @@ export default function SettingsPage() {
         {/* Notifications Tab */}
         {activeTab === 'notifications' && (
           <Card variant="default" padding="none" className="overflow-hidden">
-            <div className="px-6 py-4 border-b border-secondary-200/80 bg-primary-50/30 flex items-center justify-between">
+            <div className="px-6 py-4 border-b border-white/10 bg-amber-500/10 flex items-center justify-between">
               <div>
-                <h2 className="text-base font-bold text-secondary-950">Email Notifications</h2>
-                <p className="text-xs text-secondary-600">
+                <h2 className="text-base font-bold text-white">Email Notifications</h2>
+                <p className="text-xs text-stone-300">
                   Choose which alerts you want to receive.
                 </p>
               </div>
               <Badge variant="default" size="sm">ALERTS</Badge>
             </div>
             <div className="p-6 sm:p-8">
-              <div className="divide-y divide-secondary-200/70">
+              <div className="divide-y divide-white/10">
                 <label className="flex items-start gap-4 py-4 first:pt-0 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={notificationPrefs.detectionAlerts}
                     onChange={(e) => setNotificationPrefs({ ...notificationPrefs, detectionAlerts: e.target.checked })}
-                    className="w-4 h-4 text-primary-600 border-secondary-300 rounded focus:ring-primary-500 mt-1"
+                    className="w-4 h-4 text-amber-400 border-white/15 rounded focus:ring-primary-500 mt-1"
                   />
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-sm font-semibold text-secondary-950">Scan Completion Alerts</span>
+                      <span className="text-sm font-semibold text-white">Scan Completion Alerts</span>
                       <Badge variant="info" size="sm">RECOMMENDED</Badge>
                     </div>
-                    <p className="text-xs text-secondary-600">
+                    <p className="text-xs text-stone-300">
                       Notify when audio verification or visual report generation finishes.
                     </p>
                   </div>
@@ -424,14 +424,14 @@ export default function SettingsPage() {
                     type="checkbox"
                     checked={notificationPrefs.accountUpdates}
                     onChange={(e) => setNotificationPrefs({ ...notificationPrefs, accountUpdates: e.target.checked })}
-                    className="w-4 h-4 text-primary-600 border-secondary-300 rounded focus:ring-primary-500 mt-1"
+                    className="w-4 h-4 text-amber-400 border-white/15 rounded focus:ring-primary-500 mt-1"
                   />
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-sm font-semibold text-secondary-950">Security &amp; Account Notices</span>
+                      <span className="text-sm font-semibold text-white">Security &amp; Account Notices</span>
                       <Badge variant="warning" size="sm">ESSENTIAL</Badge>
                     </div>
-                    <p className="text-xs text-secondary-600">
+                    <p className="text-xs text-stone-300">
                       Important alerts about password changes, API keys, and quota updates.
                     </p>
                   </div>
@@ -442,13 +442,13 @@ export default function SettingsPage() {
                     type="checkbox"
                     checked={notificationPrefs.weeklyReports}
                     onChange={(e) => setNotificationPrefs({ ...notificationPrefs, weeklyReports: e.target.checked })}
-                    className="w-4 h-4 text-primary-600 border-secondary-300 rounded focus:ring-primary-500 mt-1"
+                    className="w-4 h-4 text-amber-400 border-white/15 rounded focus:ring-primary-500 mt-1"
                   />
                   <div className="flex-1">
-                    <span className="text-sm font-semibold text-secondary-950 block mb-0.5">
+                    <span className="text-sm font-semibold text-white block mb-0.5">
                       Weekly Scan Summary
                     </span>
-                    <p className="text-xs text-secondary-600">
+                    <p className="text-xs text-stone-300">
                       A weekly recap of your scanned audio files and results.
                     </p>
                   </div>
@@ -459,20 +459,20 @@ export default function SettingsPage() {
                     type="checkbox"
                     checked={notificationPrefs.marketingEmails}
                     onChange={(e) => setNotificationPrefs({ ...notificationPrefs, marketingEmails: e.target.checked })}
-                    className="w-4 h-4 text-primary-600 border-secondary-300 rounded focus:ring-primary-500 mt-1"
+                    className="w-4 h-4 text-amber-400 border-white/15 rounded focus:ring-primary-500 mt-1"
                   />
                   <div className="flex-1">
-                    <span className="text-sm font-semibold text-secondary-950 block mb-0.5">
+                    <span className="text-sm font-semibold text-white block mb-0.5">
                       Product Updates
                     </span>
-                    <p className="text-xs text-secondary-600">
+                    <p className="text-xs text-stone-300">
                       Occasional news about new VeriVox features and model improvements.
                     </p>
                   </div>
                 </label>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-secondary-200/80">
+              <div className="pt-6 mt-6 border-t border-white/10">
                 <Button
                   variant="primary"
                   size="md"
@@ -489,30 +489,30 @@ export default function SettingsPage() {
 
         {/* Account/Danger Tab */}
         {activeTab === 'danger' && (
-          <Card variant="default" padding="none" className="overflow-hidden border-danger-200">
-            <div className="px-6 py-4 border-b border-danger-200 bg-danger-50/60 flex items-center justify-between">
+          <Card variant="default" padding="none" className="overflow-hidden border-rose-500/30">
+            <div className="px-6 py-4 border-b border-rose-500/30 bg-rose-500/15 flex items-center justify-between">
               <div>
-                <h2 className="text-base font-bold text-danger-800">Delete Account &amp; Data</h2>
-                <p className="text-xs text-danger-700">
+                <h2 className="text-base font-bold text-rose-200">Delete Account &amp; Data</h2>
+                <p className="text-xs text-rose-300">
                   Permanently remove your account, uploaded audio files, and scan history.
                 </p>
               </div>
               <Badge variant="danger" size="sm">PERMANENT</Badge>
             </div>
             <div className="p-6 sm:p-8">
-              <div className="rounded-xl border border-danger-200 bg-danger-50/30 p-6">
+              <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-6">
                 <div className="flex flex-col sm:flex-row items-start gap-4">
-                  <div className="w-10 h-10 bg-danger-100 border border-danger-200 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Trash2 className="w-5 h-5 text-danger-700" />
+                  <div className="w-10 h-10 bg-rose-500/20 border border-rose-500/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Trash2 className="w-5 h-5 text-rose-300" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-base font-bold text-secondary-950 mb-1">
+                    <h3 className="text-base font-bold text-white mb-1">
                       Permanently Delete Account
                     </h3>
-                    <p className="text-sm text-secondary-600 mb-4">
+                    <p className="text-sm text-stone-300 mb-4">
                       Deleting your account immediately removes all associated records:
                     </p>
-                    <ul className="space-y-1.5 text-xs font-mono text-secondary-700 mb-6 bg-white p-4 rounded-lg border border-secondary-200">
+                    <ul className="space-y-1.5 text-xs font-mono text-stone-300 mb-6 bg-[#141210] p-4 rounded-lg border border-white/10">
                       <li>• Removes your profile and login credentials</li>
                       <li>• Deletes all audio scan logs and visual reports</li>
                       <li>• Revokes active API keys</li>

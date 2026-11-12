@@ -30,17 +30,17 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       primary:
         'bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-stone-950 hover:brightness-110 focus-visible:ring-amber-500 shadow-sm shadow-amber-500/20',
       secondary:
-        'bg-emerald-50 text-emerald-900 border border-emerald-200 hover:bg-emerald-100 focus-visible:ring-emerald-500',
+        'bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 hover:bg-emerald-500/25 focus-visible:ring-emerald-500',
       success:
-        'bg-success-600 text-white hover:bg-success-700 focus-visible:ring-success-600 border border-success-700/20 shadow-soft',
+        'bg-emerald-600 text-white hover:bg-emerald-500 focus-visible:ring-emerald-500 border border-emerald-400/20 shadow-soft',
       danger:
-        'bg-danger-600 text-white hover:bg-danger-700 focus-visible:ring-danger-600 shadow-sm',
+        'bg-rose-600 text-white hover:bg-rose-500 focus-visible:ring-rose-500 shadow-sm',
       warning:
-        'bg-warning-500 text-secondary-950 hover:bg-warning-600 focus-visible:ring-warning-500 border border-warning-600/20 shadow-soft',
+        'bg-amber-500 text-stone-950 hover:bg-amber-400 focus-visible:ring-amber-500 border border-amber-400/20 shadow-soft',
       outline:
-        'border border-secondary-300 bg-white text-secondary-900 hover:bg-amber-50/50 hover:border-amber-400 focus-visible:ring-amber-500',
+        'border border-white/20 bg-white/5 text-stone-100 hover:bg-amber-500/15 hover:border-amber-400/40 hover:text-amber-300 focus-visible:ring-amber-500',
       ghost:
-        'text-secondary-700 hover:bg-amber-50/60 hover:text-amber-800 focus-visible:ring-amber-500',
+        'text-stone-300 hover:bg-white/10 hover:text-amber-300 focus-visible:ring-amber-500',
     };
 
     const sizeStyles = {

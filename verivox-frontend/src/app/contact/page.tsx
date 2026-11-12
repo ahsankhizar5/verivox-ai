@@ -29,21 +29,21 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-[100dvh] flex flex-col bg-white text-secondary-900">
+    <div className="min-h-[100dvh] flex flex-col bg-[#141210] text-stone-100">
       <Navbar />
 
       <main className="flex-1">
         {/* Header */}
-        <section className="border-b border-primary-100 bg-gradient-to-b from-primary-50/70 via-white to-white py-14 sm:py-20">
+        <section className="border-b border-amber-500/20 bg-gradient-to-b from-[#141210] via-[#0e0d0b] to-[#0b0a09] py-14 sm:py-20">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="max-w-2xl">
               <Badge variant="primary" size="md" className="mb-4">
                 Get in Touch
               </Badge>
-              <h1 className="text-4xl sm:text-5xl font-bold text-secondary-950 tracking-tight mb-4">
+              <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">
                 Talk with the VeriVox team
               </h1>
-              <p className="text-base sm:text-lg text-secondary-600 leading-relaxed">
+              <p className="text-base sm:text-lg text-stone-300 leading-relaxed">
                 Have questions about our voice detection software, API access, or partnerships? Send us a message below.
               </p>
             </div>
@@ -51,7 +51,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Grid */}
-        <section className="py-16 sm:py-20 bg-white">
+        <section className="py-16 sm:py-20 bg-[#141210]">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
               {/* Left Column: Direct Channels */}
@@ -100,21 +100,21 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-primary-50/60 border border-primary-100 space-y-2.5">
-                  <div className="flex items-center gap-2 text-xs font-semibold text-primary-700">
-                    <Sparkles className="w-4 h-4 text-primary-600" />
+                <div className="p-6 rounded-2xl bg-amber-500/10 border border-amber-500/20 space-y-2.5">
+                  <div className="flex items-center gap-2 text-xs font-semibold text-amber-300">
+                    <Sparkles className="w-4 h-4 text-amber-400" />
                     <span>Instant Access</span>
                   </div>
-                  <h3 className="text-base font-bold text-secondary-950">
+                  <h3 className="text-base font-bold text-white">
                     Want to test the software right now?
                   </h3>
-                  <p className="text-sm text-secondary-600">
+                  <p className="text-sm text-stone-300">
                     Create a free account and scan up to 5 audio clips per day with zero wait time.
                   </p>
                   <div className="pt-1">
                     <Link
                       href="/signup"
-                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 hover:text-primary-700"
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-400 hover:text-amber-300"
                     >
                       Open Free Studio
                       <ArrowRight className="w-4 h-4" />
@@ -125,9 +125,9 @@ export default function ContactPage() {
 
               {/* Right Column: Message Form */}
               <div className="lg:col-span-7">
-                <Card variant="default" padding="lg" className="border-secondary-200 shadow-soft">
+                <Card variant="default" padding="lg" className="border-white/10 shadow-soft">
                   <div className="mb-6">
-                    <h2 className="text-2xl font-bold text-secondary-950">
+                    <h2 className="text-2xl font-bold text-white">
                       Send a Message
                     </h2>
                   </div>
@@ -140,7 +140,7 @@ export default function ContactPage() {
                       className="mb-6"
                     >
                       <div className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-success-600 flex-shrink-0 mt-0.5" />
+                        <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
                         <div>
                           <p className="font-semibold">Message received</p>
                           <p className="text-sm mt-1">
@@ -190,7 +190,7 @@ export default function ContactPage() {
                     />
 
                     <div>
-                      <label className="block text-xs font-mono uppercase tracking-wider text-secondary-700 mb-2">
+                      <label className="block text-xs font-mono uppercase tracking-wider text-stone-300 mb-2">
                         Message
                       </label>
                       <textarea
@@ -198,7 +198,7 @@ export default function ContactPage() {
                         placeholder="How can we help your team?"
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-secondary-200 hover:border-secondary-300 focus:outline-none focus:ring-2 focus:ring-primary-600/15 focus:border-primary-600 bg-white text-secondary-950 text-sm placeholder:text-secondary-400 transition-all"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-white/10 hover:border-white/15 focus:outline-none focus:ring-2 focus:ring-primary-600/15 focus:border-amber-400 bg-[#141210] text-white text-sm placeholder:text-stone-400 transition-all"
                         required
                       />
                     </div>

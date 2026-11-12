@@ -7,14 +7,14 @@ import { Button } from '@/components/ui';
 import {
   Menu,
   X,
-  LayoutDashboard,
+  User,
   LogOut,
   ArrowRight,
   Smartphone,
   Puzzle,
 } from 'lucide-react';
 
-export const BrandLogo: React.FC<{ darkText?: boolean }> = ({ darkText = true }) => (
+export const BrandLogo: React.FC<{ darkText?: boolean }> = ({ darkText = false }) => (
   <span className="inline-flex items-center gap-2.5 group">
     <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#141210] via-[#1c1917] to-[#292524] border border-amber-400/35 flex items-center justify-center shadow-md relative overflow-hidden">
       <svg
@@ -34,12 +34,12 @@ export const BrandLogo: React.FC<{ darkText?: boolean }> = ({ darkText = true })
         <rect x="8.5" y="7" width="3.2" height="18" rx="1.6" fill="url(#vvGrad)" />
         <rect x="14" y="3.5" width="3.5" height="25" rx="1.75" fill="url(#vvGrad)" />
         <rect x="19.8" y="8" width="3.2" height="16" rx="1.6" fill="url(#vvGrad)" />
-        <rect x="25.2" y="11.5" width="3.2" height="9" rx="1.6" fill="url(#vvGrad)" />
+        <rect x="25.3" y="12.5" width="3.2" height="7" rx="1.6" fill="url(#vvGrad)" />
       </svg>
     </span>
     <span
-      className={`text-lg font-extrabold tracking-tight ${
-        darkText ? 'text-secondary-950' : 'text-white'
+      className={`text-xl font-extrabold tracking-tight ${
+        darkText ? 'text-white' : 'text-white'
       }`}
     >
       Veri<span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-emerald-400">Vox</span>
@@ -48,7 +48,7 @@ export const BrandLogo: React.FC<{ darkText?: boolean }> = ({ darkText = true })
 );
 
 export const Navbar: React.FC = () => {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -57,14 +57,14 @@ export const Navbar: React.FC = () => {
     { href: '/research', label: 'Research & XAI' },
     { href: '/pricing', label: 'Pricing' },
     { href: '/security', label: 'Security' },
-    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact Us' },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#0b0a09]/95 backdrop-blur-md border-b border-white/10 text-white">
+    <nav className="bg-[#0b0a09]/95 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          {/* Brand Logo */}
           <Link href="/" className="flex items-center">
             <BrandLogo darkText={false} />
           </Link>
@@ -75,23 +75,22 @@ export const Navbar: React.FC = () => {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-stone-300 hover:text-amber-300 transition-colors duration-150"
+                className="text-sm font-medium text-stone-300 hover:text-amber-300 transition-colors"
               >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          {/* Auth Buttons + Direct APK & Extension Downloads */}
+          {/* Auth Buttons + Direct APK & Extension Links */}
           <div className="hidden md:flex items-center gap-2.5">
-            <a
-              href="/VeriVox-Extension.zip"
-              download="VeriVox-Extension.zip"
+            <Link
+              href="/extension"
               className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-400/30 text-xs font-semibold transition-all"
             >
               <Puzzle className="w-3.5 h-3.5" />
               <span>Extension</span>
-            </a>
+            </Link>
 
             <a
               href="/VeriVox.apk"
@@ -105,41 +104,41 @@ export const Navbar: React.FC = () => {
             {isAuthenticated ? (
               <>
                 <Link href="/dashboard">
-                  <Button variant="ghost" size="sm" className="!text-stone-200 hover:!bg-white/10">
-                    <LayoutDashboard className="w-4 h-4" />
-                    Dashboard
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-stone-200 hover:text-white hover:bg-white/10"
+                  >
+                    <User className="w-4 h-4" />
+                    {user?.firstName || 'Studio'}
                   </Button>
                 </Link>
-                <div className="flex items-center gap-3 pl-3 border-l border-white/15">
-                  <span className="text-xs font-mono text-stone-300">
-                    {user?.firstName || user?.email}
-                  </span>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={logout}
-                    className="!bg-transparent !text-stone-200 !border-white/20 hover:!bg-white/10"
-                  >
-                    <LogOut className="w-3.5 h-3.5" />
-                    Logout
-                  </Button>
-                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={logout}
+                  className="border-white/20 bg-white/5 text-white hover:bg-white/10"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Sign Out
+                </Button>
               </>
             ) : (
               <>
                 <Link href="/login">
-                  <Button variant="ghost" size="sm" className="!text-stone-200 hover:!bg-white/10">
-                    Sign In
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-stone-200 hover:text-white hover:bg-white/10"
+                  >
+                    Log In
                   </Button>
                 </Link>
                 <Link href="/signup">
-                  <button
-                    type="button"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 text-stone-950 hover:brightness-110 transition-all shadow-sm"
-                  >
-                    Try Free
+                  <Button variant="primary" size="sm">
+                    <span>Start Free</span>
                     <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                  </Button>
                 </Link>
               </>
             )}
@@ -150,12 +149,12 @@ export const Navbar: React.FC = () => {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-stone-200 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-              aria-label="Toggle navigation menu"
+              aria-label="Toggle navigation"
             >
               {mobileMenuOpen ? (
-                <X className="w-5 h-5" />
+                <X className="w-6 h-6" />
               ) : (
-                <Menu className="w-5 h-5" />
+                <Menu className="w-6 h-6" />
               )}
             </button>
           </div>
@@ -163,14 +162,14 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-white/10 animate-slide-down">
-            <div className="flex flex-col space-y-3">
+          <div className="md:hidden py-4 border-t border-white/10">
+            <div className="flex flex-col space-y-2.5">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
+                  className="text-sm font-medium text-stone-200 hover:text-amber-300 px-2 py-1.5 rounded-lg hover:bg-white/5 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-sm font-medium text-stone-200 hover:text-amber-300 transition-colors px-2 py-1.5"
                 >
                   {link.label}
                 </Link>
@@ -183,38 +182,55 @@ export const Navbar: React.FC = () => {
                 <Smartphone className="w-4 h-4" />
                 Download Android APK (2.3 MB)
               </a>
-              <a
-                href="/VeriVox-Extension.zip"
-                download="VeriVox-Extension.zip"
+              <Link
+                href="/extension"
+                onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center gap-2 text-sm font-semibold text-emerald-300 px-2 py-1.5"
               >
                 <Puzzle className="w-4 h-4" />
-                Download Browser Extension (.zip)
-              </a>
+                Launch Browser Extension
+              </Link>
               <div className="pt-3 border-t border-white/10 flex flex-col space-y-2">
                 {isAuthenticated ? (
                   <>
-                    <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
-                      <Button variant="outline" size="md" fullWidth>
-                        <LayoutDashboard className="w-4 h-4" />
-                        Dashboard
+                    <Link
+                      href="/dashboard"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Button variant="primary" size="sm" fullWidth>
+                        <User className="w-4 h-4" />
+                        Open Studio
                       </Button>
                     </Link>
-                    <Button variant="ghost" size="md" fullWidth onClick={logout}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      fullWidth
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        logout();
+                      }}
+                    >
                       <LogOut className="w-4 h-4" />
-                      Logout
+                      Sign Out
                     </Button>
                   </>
                 ) : (
                   <>
-                    <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                      <Button variant="outline" size="md" fullWidth>
-                        Sign In
+                    <Link
+                      href="/login"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Button variant="outline" size="sm" fullWidth>
+                        Log In
                       </Button>
                     </Link>
-                    <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
-                      <Button variant="primary" size="md" fullWidth>
-                        Try Free
+                    <Link
+                      href="/signup"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <Button variant="primary" size="sm" fullWidth>
+                        Start Free
                       </Button>
                     </Link>
                   </>

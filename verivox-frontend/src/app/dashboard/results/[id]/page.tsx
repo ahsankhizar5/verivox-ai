@@ -453,18 +453,18 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
             <CardContent padding="xl">
               <div className="text-center py-12">
                 <Spinner size="lg" className="mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-secondary-950 mb-2">
+                <h3 className="text-xl font-bold text-white mb-2">
                   {processing
                     ? 'Scanning Audio with VeriVox AI...'
                     : 'Loading Verification Report...'}
                 </h3>
-                <p className="text-sm text-secondary-600 mb-2">
+                <p className="text-sm text-stone-300 mb-2">
                   {processing
                     ? 'Evaluating voice authenticity across active speech windows.'
                     : 'Loading scan details'}
                 </p>
                 {processing && estSeconds > 0 && (
-                  <p className="font-mono text-xs text-secondary-400 mt-2">
+                  <p className="font-mono text-xs text-stone-400 mt-2">
                     ELAPSED: {timeStr}
                   </p>
                 )}
@@ -516,13 +516,13 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
   const isUncertain = result.isUncertain;
 
   return (
-    <div className="min-h-[100dvh] bg-secondary-50">
+    <div className="min-h-[100dvh] bg-[#0b0a09]">
       {/* Dossier Header */}
-      <div className="bg-white border-b border-secondary-200">
+      <div className="bg-[#141210] border-b border-white/10">
         <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto">
           <Link
             href="/dashboard/history"
-            className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-primary-600 hover:text-primary-800 mb-4 transition-colors font-semibold"
+            className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-amber-400 hover:text-primary-800 mb-4 transition-colors font-semibold"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Scan History
@@ -535,8 +535,8 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
                   isUncertain
                     ? 'bg-warning-50 border-warning-200 text-warning-600'
                     : isSpoof
-                    ? 'bg-danger-50 border-danger-200 text-danger-600'
-                    : 'bg-success-50 border-success-200 text-success-600'
+                    ? 'bg-rose-500/15 border-rose-500/30 text-rose-400'
+                    : 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400'
                 }`}
               >
                 {isUncertain ? (
@@ -548,10 +548,10 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
                 )}
               </div>
               <div>
-                <div className="font-mono text-xs uppercase tracking-wider text-primary-600 font-semibold mb-1">
+                <div className="font-mono text-xs uppercase tracking-wider text-amber-400 font-semibold mb-1">
                   SCAN REPORT #{params.id.slice(-8).toUpperCase()}
                 </div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-secondary-950 tracking-tight mb-1.5">
+                <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-1.5">
                   {isUncertain
                     ? 'Inconclusive / Borderline Audio'
                     : isSpoof
@@ -567,7 +567,7 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
                   >
                     {confidencePercent}% CONFIDENCE
                   </Badge>
-                  <span className="font-mono text-xs text-secondary-500">
+                  <span className="font-mono text-xs text-stone-400">
                     Scanned {new Date(result.createdAt).toLocaleString()}
                   </span>
                 </div>
@@ -585,7 +585,7 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
                 {generatingPdf ? 'Building PDF...' : 'Download PDF Report'}
               </Button>
               <Button variant="outline" size="md" onClick={handleDelete}>
-                <Trash2 className="w-4 h-4 text-danger-600" />
+                <Trash2 className="w-4 h-4 text-rose-400" />
                 Delete Scan
               </Button>
             </div>
@@ -613,38 +613,38 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
 
         {/* File Telemetry Strip */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="p-4 rounded-2xl bg-white border border-secondary-200">
-            <div className="font-mono text-[11px] uppercase tracking-wider text-secondary-500 mb-1">
+          <div className="p-4 rounded-2xl bg-[#141210] border border-white/10">
+            <div className="font-mono text-[11px] uppercase tracking-wider text-stone-400 mb-1">
               FILE NAME
             </div>
-            <div className="font-mono text-sm font-semibold text-secondary-950 break-all">
+            <div className="font-mono text-sm font-semibold text-white break-all">
               {result.metadata?.fileName || 'Unknown'}
             </div>
           </div>
-          <div className="p-4 rounded-2xl bg-white border border-secondary-200">
-            <div className="font-mono text-[11px] uppercase tracking-wider text-secondary-500 mb-1">
+          <div className="p-4 rounded-2xl bg-[#141210] border border-white/10">
+            <div className="font-mono text-[11px] uppercase tracking-wider text-stone-400 mb-1">
               FILE SIZE
             </div>
-            <div className="font-mono text-sm font-semibold text-secondary-950">
+            <div className="font-mono text-sm font-semibold text-white">
               {result.metadata?.fileSize
                 ? (result.metadata.fileSize / 1024 / 1024).toFixed(2)
                 : 'N/A'}{' '}
               MB
             </div>
           </div>
-          <div className="p-4 rounded-2xl bg-white border border-secondary-200">
-            <div className="font-mono text-[11px] uppercase tracking-wider text-secondary-500 mb-1">
+          <div className="p-4 rounded-2xl bg-[#141210] border border-white/10">
+            <div className="font-mono text-[11px] uppercase tracking-wider text-stone-400 mb-1">
               DURATION
             </div>
-            <div className="font-mono text-sm font-semibold text-secondary-950">
+            <div className="font-mono text-sm font-semibold text-white">
               {result.metadata?.duration?.toFixed(1) || 'N/A'}s
             </div>
           </div>
-          <div className="p-4 rounded-2xl bg-white border border-secondary-200">
-            <div className="font-mono text-[11px] uppercase tracking-wider text-secondary-500 mb-1">
+          <div className="p-4 rounded-2xl bg-[#141210] border border-white/10">
+            <div className="font-mono text-[11px] uppercase tracking-wider text-stone-400 mb-1">
               AUDIO FORMAT
             </div>
-            <div className="font-mono text-sm font-semibold text-primary-700">
+            <div className="font-mono text-sm font-semibold text-amber-300">
               {result.metadata?.fileName?.split('.').pop()?.toUpperCase() ||
                 'AUDIO'}{' '}
               • 16 kHz
@@ -658,30 +658,30 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
           <Card variant="default" padding="lg" className="lg:col-span-6 space-y-5">
             <div className="flex items-center justify-between">
               <div>
-                <div className="font-mono text-xs uppercase tracking-wider text-primary-600 font-semibold">
+                <div className="font-mono text-xs uppercase tracking-wider text-amber-400 font-semibold">
                   DETECTION SCORES
                 </div>
-                <h3 className="text-lg font-bold text-secondary-950">
+                <h3 className="text-lg font-bold text-white">
                   Probability Breakdown
                 </h3>
               </div>
-              <Cpu className="w-5 h-5 text-primary-600" />
+              <Cpu className="w-5 h-5 text-amber-400" />
             </div>
 
             <div className="space-y-4">
-              <div className="p-4 rounded-xl bg-danger-50/60 border border-danger-200">
+              <div className="p-4 rounded-xl bg-rose-500/15 border border-rose-500/30">
                 <div className="flex items-center justify-between mb-2 font-mono text-xs">
-                  <span className="font-semibold text-danger-800 uppercase">
+                  <span className="font-semibold text-rose-200 uppercase">
                     DEEPFAKE (SYNTHETIC / CLONED)
                   </span>
-                  <span className="text-lg font-bold text-danger-700">
+                  <span className="text-lg font-bold text-rose-300">
                     {Math.round(
                       (result.xai.confidenceBreakdown.spoof || 0) * 100
                     )}
                     %
                   </span>
                 </div>
-                <div className="h-2.5 bg-danger-100 rounded-full overflow-hidden">
+                <div className="h-2.5 bg-rose-500/20 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-danger-600 rounded-full transition-all"
                     style={{
@@ -693,12 +693,12 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-success-50/60 border border-success-200">
+              <div className="p-4 rounded-xl bg-emerald-500/15/60 border border-emerald-500/30">
                 <div className="flex items-center justify-between mb-2 font-mono text-xs">
                   <span className="font-semibold text-success-800 uppercase">
                     AUTHENTIC (REAL HUMAN)
                   </span>
-                  <span className="text-lg font-bold text-success-700">
+                  <span className="text-lg font-bold text-emerald-300">
                     {Math.round(
                       (result.xai.confidenceBreakdown.bona_fide || 0) * 100
                     )}
@@ -724,23 +724,23 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
             <div>
               <div className="flex items-center justify-between mb-3">
                 <div>
-                  <div className="font-mono text-xs uppercase tracking-wider text-primary-600 font-semibold">
+                  <div className="font-mono text-xs uppercase tracking-wider text-amber-400 font-semibold">
                     AI EXPLANATION
                   </div>
-                  <h3 className="text-lg font-bold text-secondary-950">
+                  <h3 className="text-lg font-bold text-white">
                     Summary &amp; Key Findings
                   </h3>
                 </div>
-                <Layers className="w-5 h-5 text-primary-600" />
+                <Layers className="w-5 h-5 text-amber-400" />
               </div>
 
-              <div className="p-3.5 rounded-xl bg-primary-50/50 border border-primary-100 mb-4">
-                <p className="text-sm font-medium text-secondary-900">
+              <div className="p-3.5 rounded-xl bg-amber-500/15/50 border border-amber-500/20 mb-4">
+                <p className="text-sm font-medium text-stone-100">
                   {result.xai.summary}
                 </p>
               </div>
 
-              <p className="text-sm text-secondary-600 leading-relaxed whitespace-pre-line">
+              <p className="text-sm text-stone-300 leading-relaxed whitespace-pre-line">
                 {result.xai.explanation ||
                   'Click "Generate Visual Heatmap" below to run LIME time-segment analysis and generate a detailed breakdown of this recording.'}
               </p>
@@ -750,7 +750,7 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
 
         {/* Visual Analysis Section */}
         <Card variant="default" padding="none" className="overflow-hidden">
-          <div className="bg-gradient-to-r from-[#0d111d] to-primary-950 text-white px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-primary-800">
+          <div className="bg-gradient-to-r from-[#0d111d] to-primary-950 text-white px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-amber-500/30">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 bg-primary-900/80 border border-primary-700 rounded-xl flex items-center justify-center">
                 <ImageIcon className="w-4 h-4 text-emerald-400" />
@@ -781,7 +781,7 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
 
           <div className="p-6">
             {result.visuals.spectrogramUrl ? (
-              <div className="bg-[#0d111d] rounded-xl flex items-center justify-center overflow-hidden border border-primary-800">
+              <div className="bg-[#0d111d] rounded-xl flex items-center justify-center overflow-hidden border border-amber-500/30">
                 <img
                   src={result.visuals.spectrogramUrl}
                   alt="LIME Analysis Graph"
@@ -800,11 +800,11 @@ export default function ResultDetailPage({ params }: { params: { id: string } })
                 />
               </div>
             ) : (
-              <div className="text-center py-12 px-4 rounded-xl bg-primary-50/30 border border-dashed border-primary-200">
-                <p className="font-mono text-xs uppercase tracking-wider text-primary-700 font-semibold mb-2">
+              <div className="text-center py-12 px-4 rounded-xl bg-amber-500/10 border border-dashed border-amber-500/30">
+                <p className="font-mono text-xs uppercase tracking-wider text-amber-300 font-semibold mb-2">
                   VISUAL HEATMAP ON DEMAND
                 </p>
-                <p className="text-sm text-secondary-600 max-w-md mx-auto mb-5">
+                <p className="text-sm text-stone-300 max-w-md mx-auto mb-5">
                   Your instant voice scan is complete. Click below to generate a visual time-segment heatmap showing exactly which moments influenced the verdict.
                 </p>
                 <Button

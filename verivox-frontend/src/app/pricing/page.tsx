@@ -89,21 +89,21 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="min-h-[100dvh] flex flex-col bg-white text-secondary-900">
+    <div className="min-h-[100dvh] flex flex-col bg-[#141210] text-stone-100">
       <Navbar />
 
       <main className="flex-1">
         {/* Header */}
-        <section className="border-b border-primary-100 bg-gradient-to-b from-primary-50/70 via-white to-white py-14 sm:py-20">
+        <section className="border-b border-amber-500/20 bg-gradient-to-b from-[#141210] via-[#0e0d0b] to-[#0b0a09] py-14 sm:py-20">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="max-w-2xl">
               <Badge variant="primary" size="md" className="mb-4">
                 Simple Pricing
               </Badge>
-              <h1 className="text-4xl sm:text-5xl font-bold text-secondary-950 tracking-tight mb-4">
+              <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-4">
                 Start scanning audio for free today
               </h1>
-              <p className="text-base sm:text-lg text-secondary-600 leading-relaxed">
+              <p className="text-base sm:text-lg text-stone-300 leading-relaxed">
                 Get full access to our detection studio for free, or reach out for high volume team and API plans.
               </p>
             </div>
@@ -111,7 +111,7 @@ export default function PricingPage() {
         </section>
 
         {/* Pricing Cards */}
-        <section className="py-16 sm:py-20 bg-white border-b border-secondary-200/70">
+        <section className="py-16 sm:py-20 bg-[#141210] border-b border-white/10">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
               {plans.map((plan) => {
@@ -124,8 +124,8 @@ export default function PricingPage() {
                     className={cn(
                       'flex flex-col justify-between rounded-2xl overflow-hidden transition-all',
                       plan.highlighted
-                        ? 'border-2 border-primary-600 shadow-xl shadow-primary-600/10'
-                        : 'border border-secondary-200 bg-secondary-50/40'
+                        ? 'border-2 border-amber-400 shadow-xl shadow-primary-600/10'
+                        : 'border border-white/10 bg-[#12100e]'
                     )}
                   >
                     <div className="p-6 sm:p-8 flex-1 flex flex-col">
@@ -136,21 +136,21 @@ export default function PricingPage() {
                         >
                           {plan.tag}
                         </Badge>
-                        <IconComponent className="w-5 h-5 text-primary-600" />
+                        <IconComponent className="w-5 h-5 text-amber-400" />
                       </div>
 
-                      <h2 className="text-2xl font-bold text-secondary-950 mb-2">
+                      <h2 className="text-2xl font-bold text-white mb-2">
                         {plan.name}
                       </h2>
-                      <p className="text-sm text-secondary-600 leading-relaxed mb-6">
+                      <p className="text-sm text-stone-300 leading-relaxed mb-6">
                         {plan.description}
                       </p>
 
-                      <div className="mb-6 pb-6 border-b border-secondary-200 flex items-baseline gap-1">
-                        <span className="text-4xl sm:text-5xl font-bold text-secondary-950">
+                      <div className="mb-6 pb-6 border-b border-white/10 flex items-baseline gap-1">
+                        <span className="text-4xl sm:text-5xl font-bold text-white">
                           {plan.price}
                         </span>
-                        <span className="text-sm text-secondary-500">
+                        <span className="text-sm text-stone-400">
                           {plan.period}
                         </span>
                       </div>
@@ -160,15 +160,15 @@ export default function PricingPage() {
                           {plan.features.map((feature, index) => (
                             <li key={index} className="flex items-start gap-3 text-sm">
                               {feature.included ? (
-                                <Check className="w-4 h-4 text-primary-600 flex-shrink-0 mt-0.5" />
+                                <Check className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
                               ) : (
-                                <X className="w-4 h-4 text-secondary-300 flex-shrink-0 mt-0.5" />
+                                <X className="w-4 h-4 text-stone-600 flex-shrink-0 mt-0.5" />
                               )}
                               <span
                                 className={
                                   feature.included
-                                    ? 'text-secondary-800'
-                                    : 'text-secondary-400 line-through'
+                                    ? 'text-stone-200'
+                                    : 'text-stone-400 line-through'
                                 }
                               >
                                 {feature.text}
@@ -197,13 +197,13 @@ export default function PricingPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-16 sm:py-20 bg-secondary-50/60">
+        <section className="py-16 sm:py-20 bg-[#12100e]">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
             <div className="max-w-2xl mb-10">
               <Badge variant="primary" size="md" className="mb-3">
                 Common Questions
               </Badge>
-              <h2 className="text-3xl font-bold text-secondary-950 tracking-tight">
+              <h2 className="text-3xl font-bold text-white tracking-tight">
                 Quick answers about plans and features
               </h2>
             </div>
@@ -212,12 +212,12 @@ export default function PricingPage() {
               {faqs.map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 rounded-2xl bg-white border border-secondary-200 shadow-soft"
+                  className="p-6 rounded-2xl bg-[#141210] border border-white/10 shadow-soft"
                 >
-                  <h3 className="text-base sm:text-lg font-bold text-secondary-950 mb-2">
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-2">
                     {item.q}
                   </h3>
-                  <p className="text-sm text-secondary-600 leading-relaxed">{item.a}</p>
+                  <p className="text-sm text-stone-300 leading-relaxed">{item.a}</p>
                 </div>
               ))}
             </div>
