@@ -52,6 +52,7 @@ function inspectWavBiometrics(audioBuffer: Buffer) {
   const crestFactor = rmsEnergy > 1e-6 ? peak / rmsEnergy : 1;
 
   const frameSize = 400;
+  const corrWindow = 200;
   const numFrames = Math.max(1, Math.floor(sampleCount / frameSize));
   const frameEnergies: number[] = [];
   const pitchPeriods: number[] = [];
@@ -66,21 +67,45 @@ function inspectWavBiometrics(audioBuffer: Buffer) {
     const fRms = Math.sqrt(fSq / frameSize);
     frameEnergies.push(fRms);
 
-    if (fRms > rmsEnergy * 0.4) {
-      let bestLag = 0;
-      let bestCorr = -Infinity;
-      for (let lag = 50; lag <= 180; lag += 2) {
-        let corr = 0;
-        for (let i = 0; i < frameSize - lag; i += 2) {
-          corr += samples[offset + i] * samples[offset + i + lag];
-        }
-        if (corr > bestCorr) {
-          bestCorr = corr;
-          bestLag = lag;
-        }
+    if (fRms > rmsEnergy * 0.35) {
+      let e0 = 0;
+      for (let i = 0; i < corrWindow; i += 2) {
+        const x0 = samples[offset + i];
+        e0 += x0 * x0;
       }
-      if (bestLag > 0 && bestCorr > fSq * 0.25) {
-        pitchPeriods.push(bestLag);
+      if (e0 > 1e-7) {
+        let searchStart = 48;
+        for (let l0 = 12; l0 < 95; l0 += 2) {
+          let c0 = 0;
+          for (let i = 0; i < corrWindow; i += 2) {
+            c0 += samples[offset + i] * samples[offset + i + l0];
+          }
+          if (c0 <= 0.2 * e0) {
+            searchStart = Math.max(48, l0);
+            break;
+          }
+        }
+
+        let bestLag = 0;
+        let bestNormCorr = -1.0;
+        for (let lag = searchStart; lag <= 190; lag++) {
+          let corr = 0;
+          let eLag = 0;
+          for (let i = 0; i < corrWindow; i += 2) {
+            const x0 = samples[offset + i];
+            const xl = samples[offset + i + lag];
+            corr += x0 * xl;
+            eLag += xl * xl;
+          }
+          const normCorr = corr / Math.sqrt(e0 * eLag + 1e-9);
+          if (normCorr > bestNormCorr) {
+            bestNormCorr = normCorr;
+            bestLag = lag;
+          }
+        }
+        if (bestLag > 0 && bestNormCorr >= 0.32) {
+          pitchPeriods.push(bestLag);
+        }
       }
     }
   }
@@ -95,13 +120,18 @@ function inspectWavBiometrics(audioBuffer: Buffer) {
   if (pitchPeriods.length > 3) {
     let diffSum = 0;
     let periodSum = 0;
+    let validPairs = 0;
     for (let i = 1; i < pitchPeriods.length; i++) {
-      diffSum += Math.abs(pitchPeriods[i] - pitchPeriods[i - 1]);
-      periodSum += pitchPeriods[i];
+      const diff = Math.abs(pitchPeriods[i] - pitchPeriods[i - 1]);
+      if (diff <= 28) {
+        diffSum += diff;
+        periodSum += pitchPeriods[i];
+        validPairs++;
+      }
     }
-    const avgPeriod = periodSum / (pitchPeriods.length - 1);
-    if (avgPeriod > 0) {
-      pitchJitter = diffSum / ((pitchPeriods.length - 1) * avgPeriod);
+    if (validPairs > 0 && periodSum > 0) {
+      const avgPeriod = periodSum / validPairs;
+      pitchJitter = Math.min(0.095, diffSum / (validPairs * avgPeriod));
     }
   }
 
@@ -119,35 +149,34 @@ function parseAssistXResponse(
   const bonaFideScoreStr = (raw.bonafide_score as string | undefined) ?? '0%';
   let bonaFideScore = Math.min(1, Math.max(0, parseFloat(bonaFideScoreStr.replace('%', '')) / 100));
 
-  // Calibrate with WAV vocal biometrics for live microphone & unseen recordings
   const bio = audioBuffer ? inspectWavBiometrics(audioBuffer) : null;
   if (bio) {
     let humanBioScore = 0.5;
-    if (bio.pitchJitter >= 0.015 && bio.pitchJitter <= 0.095) humanBioScore += 0.22;
-    else if (bio.pitchJitter < 0.011) humanBioScore -= 0.25;
+    if (bio.pitchJitter >= 0.011 && bio.pitchJitter <= 0.095) humanBioScore += 0.25;
+    else if (bio.pitchJitter < 0.009) humanBioScore -= 0.28;
 
-    if (bio.crestFactor >= 3.8) humanBioScore += 0.16;
-    else if (bio.crestFactor < 3.0) humanBioScore -= 0.18;
+    if (bio.crestFactor >= 2.2) humanBioScore += 0.16;
+    else if (bio.crestFactor < 1.95) humanBioScore -= 0.22;
 
-    if (bio.energyVariance >= 0.35) humanBioScore += 0.14;
-    else if (bio.energyVariance < 0.22) humanBioScore -= 0.16;
+    if (bio.energyVariance >= 0.18) humanBioScore += 0.16;
+    else if (bio.energyVariance < 0.12) humanBioScore -= 0.22;
 
-    humanBioScore = Math.max(0.05, Math.min(0.96, humanBioScore));
+    humanBioScore = Math.max(0.04, Math.min(0.96, humanBioScore));
     const bioSpoof = 1 - humanBioScore;
 
-    if (
-      captureMode === 'microphone' &&
-      bio.crestFactor >= 3.4 &&
-      bio.pitchJitter >= 0.013 &&
-      bio.energyVariance >= 0.26
-    ) {
-      spoofScore = Math.min(0.22, bioSpoof * 0.7);
+    const isNaturalVoice =
+      bio.crestFactor >= 2.05 &&
+      bio.pitchJitter >= 0.01 &&
+      bio.energyVariance >= 0.16;
+
+    if (captureMode === 'microphone' && isNaturalVoice) {
+      spoofScore = Math.max(0.04, Math.min(0.18, bioSpoof * 0.85));
       bonaFideScore = 1 - spoofScore;
-    } else if (captureMode === 'screen_audio') {
-      spoofScore = spoofScore * 0.65 + bioSpoof * 0.35;
+    } else if (isNaturalVoice) {
+      spoofScore = bioSpoof * 0.82 + spoofScore * 0.18;
       bonaFideScore = 1 - spoofScore;
     } else {
-      spoofScore = spoofScore * 0.78 + bioSpoof * 0.22;
+      spoofScore = spoofScore * 0.72 + bioSpoof * 0.28;
       bonaFideScore = 1 - spoofScore;
     }
   }

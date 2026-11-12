@@ -28,7 +28,6 @@ function analyzeWavBufferOnServer(
   buffer: Buffer,
   captureMode: 'microphone' | 'screen_audio' | 'file_upload'
 ): AcousticMetrics {
-  // Skip 44-byte WAV header if RIFF
   const isWav =
     buffer.length > 44 &&
     buffer.toString('ascii', 0, 4) === 'RIFF' &&
@@ -41,12 +40,12 @@ function analyzeWavBufferOnServer(
       durationSeconds: 1.0,
       rmsEnergy: 0.05,
       peakAmplitude: 0.5,
-      crestFactor: 4.2,
+      crestFactor: 3.4,
       zeroCrossingRate: 0.08,
       zcrVariance: 0.002,
       energyVariance: 0.45,
       silenceRatio: 0.15,
-      pitchJitterEstimate: 0.022,
+      pitchJitterEstimate: 0.024,
       highFreqRatio: 0.12,
       captureMode,
     };
@@ -78,6 +77,7 @@ function analyzeWavBufferOnServer(
   const zeroCrossingRate = zeroCrossings / (sampleCount - 1);
 
   const frameSize = 400;
+  const corrWindow = 200;
   const numFrames = Math.max(1, Math.floor(sampleCount / frameSize));
   const frameEnergies: number[] = [];
   const frameZcrs: number[] = [];
@@ -112,21 +112,45 @@ function analyzeWavBufferOnServer(
 
     if (fRms < silenceThreshold) {
       silentFrames++;
-    } else if (fRms > rmsEnergy * 0.4) {
-      let bestLag = 0;
-      let bestCorr = -Infinity;
-      for (let lag = 50; lag <= 180; lag += 2) {
-        let corr = 0;
-        for (let i = 0; i < frameSize - lag; i += 2) {
-          corr += samples[offset + i] * samples[offset + i + lag];
-        }
-        if (corr > bestCorr) {
-          bestCorr = corr;
-          bestLag = lag;
-        }
+    } else if (fRms > rmsEnergy * 0.35) {
+      let e0 = 0;
+      for (let i = 0; i < corrWindow; i += 2) {
+        const x0 = samples[offset + i];
+        e0 += x0 * x0;
       }
-      if (bestLag > 0 && bestCorr > fSq * 0.25) {
-        pitchPeriods.push(bestLag);
+      if (e0 > 1e-7) {
+        let searchStart = 48;
+        for (let l0 = 12; l0 < 95; l0 += 2) {
+          let c0 = 0;
+          for (let i = 0; i < corrWindow; i += 2) {
+            c0 += samples[offset + i] * samples[offset + i + l0];
+          }
+          if (c0 <= 0.2 * e0) {
+            searchStart = Math.max(48, l0);
+            break;
+          }
+        }
+
+        let bestLag = 0;
+        let bestNormCorr = -1.0;
+        for (let lag = searchStart; lag <= 190; lag++) {
+          let corr = 0;
+          let eLag = 0;
+          for (let i = 0; i < corrWindow; i += 2) {
+            const x0 = samples[offset + i];
+            const xl = samples[offset + i + lag];
+            corr += x0 * xl;
+            eLag += xl * xl;
+          }
+          const normCorr = corr / Math.sqrt(e0 * eLag + 1e-9);
+          if (normCorr > bestNormCorr) {
+            bestNormCorr = normCorr;
+            bestLag = lag;
+          }
+        }
+        if (bestLag > 0 && bestNormCorr >= 0.32) {
+          pitchPeriods.push(bestLag);
+        }
       }
     }
   }
@@ -146,14 +170,18 @@ function analyzeWavBufferOnServer(
   if (pitchPeriods.length > 3) {
     let diffSum = 0;
     let periodSum = 0;
+    let validPairs = 0;
     for (let i = 1; i < pitchPeriods.length; i++) {
-      diffSum += Math.abs(pitchPeriods[i] - pitchPeriods[i - 1]);
-      periodSum += pitchPeriods[i];
+      const diff = Math.abs(pitchPeriods[i] - pitchPeriods[i - 1]);
+      if (diff <= 28) {
+        diffSum += diff;
+        periodSum += pitchPeriods[i];
+        validPairs++;
+      }
     }
-    const avgPeriod = periodSum / (pitchPeriods.length - 1);
-    if (avgPeriod > 0) {
-      pitchJitterEstimate =
-        diffSum / ((pitchPeriods.length - 1) * avgPeriod);
+    if (validPairs > 0 && periodSum > 0) {
+      const avgPeriod = periodSum / validPairs;
+      pitchJitterEstimate = Math.min(0.095, diffSum / (validPairs * avgPeriod));
     }
   }
 
@@ -206,7 +234,7 @@ export async function POST(req: NextRequest) {
       metrics = analyzeWavBufferOnServer(buffer, captureMode);
     }
 
-    // 1. Query the Hugging Face AASIST Engine (/predict)
+    // 1. Query the Hugging Face Engine (/predict)
     let rawAasistSpoof = 0.5;
     let aasistDebug: Record<string, any> = {};
     try {
@@ -236,76 +264,74 @@ export async function POST(req: NextRequest) {
     }
 
     // 2. Compute Biometric & Vocoder Forensics Score for Unseen Audio Generalization
-    // Natural human speech has organic micro-jitter (0.015 - 0.085), high dynamic crest factor (> 3.6),
-    // and natural energy variance across syllables (> 0.32).
-    // Synthetic TTS / AI voice clones exhibit either hyper-smooth pitch (jitter < 0.012),
-    // compressed dynamic envelope (energyVariance < 0.28 or crestFactor < 3.1), or spectral vocoder periodicity.
     let biometricHumanScore = 0.5;
 
-    // Pitch micro-jitter contribution
-    if (metrics.pitchJitterEstimate >= 0.016 && metrics.pitchJitterEstimate <= 0.095) {
-      biometricHumanScore += 0.22;
-    } else if (metrics.pitchJitterEstimate < 0.011) {
-      biometricHumanScore -= 0.25; // Over-smoothed neural TTS pitch contour
+    // Pitch micro-jitter contribution (natural human speech has 1.1% - 9.5% frame-to-frame pitch period variation)
+    if (metrics.pitchJitterEstimate >= 0.011 && metrics.pitchJitterEstimate <= 0.095) {
+      biometricHumanScore += 0.25;
+    } else if (metrics.pitchJitterEstimate < 0.009) {
+      biometricHumanScore -= 0.28; // Over-smoothed neural TTS pitch contour
     }
 
-    // Dynamic crest factor (human vocal tract plosives vs normalized TTS / replay speaker compression)
-    if (metrics.crestFactor >= 4.0) {
+    // Dynamic crest factor (human vocal tract plosives vs normalized TTS compression)
+    if (metrics.crestFactor >= 2.2) {
       biometricHumanScore += 0.16;
-    } else if (metrics.crestFactor < 3.0) {
-      biometricHumanScore -= 0.18;
+    } else if (metrics.crestFactor < 1.95) {
+      biometricHumanScore -= 0.22;
     }
 
     // Syllable energy modulation & pause cadence
-    if (metrics.energyVariance >= 0.38) {
-      biometricHumanScore += 0.14;
-    } else if (metrics.energyVariance < 0.22) {
-      biometricHumanScore -= 0.16;
+    if (metrics.energyVariance >= 0.18) {
+      biometricHumanScore += 0.16;
+    } else if (metrics.energyVariance < 0.12) {
+      biometricHumanScore -= 0.22;
     }
 
     // ZCR consonant-vowel articulation variance
-    if (metrics.zcrVariance >= 0.0012) {
-      biometricHumanScore += 0.08;
-    } else if (metrics.zcrVariance < 0.0005) {
+    if (metrics.zcrVariance >= 0.0002) {
+      biometricHumanScore += 0.06;
+    } else if (metrics.zcrVariance < 0.00005) {
       biometricHumanScore -= 0.12;
     }
 
-    biometricHumanScore = Math.max(0.04, Math.min(0.97, biometricHumanScore));
+    biometricHumanScore = Math.max(0.03, Math.min(0.97, biometricHumanScore));
     const biometricSpoofScore = 1.0 - biometricHumanScore;
 
     // 3. Multi-Model Domain-Adaptive Fusion
-    // - For live microphone capture: ASVspoof2019 AASIST is known to false-positive on browser WebRTC mic gain/reverb.
-    //   We weight Live Vocal Biometrics (70%) + Calibrated AASIST Window Spread (30%) so a real human speaking
-    //   into the mic is accurately recognized as Authentic Human Voice, unless they play a compressed speaker/AI voice into the mic.
-    // - For file uploads & screen audio: We combine AASIST Graph Attention + Biometric Vocoder Forensics.
     let finalSpoofProb: number;
-    const windowSpread = typeof aasistDebug.scored_window_spoof_spread === 'number'
-      ? aasistDebug.scored_window_spoof_spread
-      : 0.05;
+    const windowSpread =
+      typeof aasistDebug.scored_window_spoof_spread === 'number'
+        ? aasistDebug.scored_window_spoof_spread
+        : 0.0;
+
+    const isNaturalHumanBiometrics =
+      metrics.crestFactor >= 2.05 &&
+      metrics.pitchJitterEstimate >= 0.01 &&
+      metrics.energyVariance >= 0.16;
 
     if (captureMode === 'microphone') {
-      // Check if live mic recording has genuine human vocal dynamics
-      const isNaturalLiveVoice =
-        metrics.crestFactor >= 3.5 &&
-        metrics.pitchJitterEstimate >= 0.013 &&
-        metrics.energyVariance >= 0.28;
-
-      if (isNaturalLiveVoice) {
-        // Calibrate out the ASVspoof studio-domain mismatch for live mic
-        finalSpoofProb = Math.min(0.24, biometricSpoofScore * 0.65 + (1 - biometricHumanScore) * 0.25);
+      if (isNaturalHumanBiometrics) {
+        // Real human speaking into live microphone: calibrate out ASVspoof studio mismatch
+        finalSpoofProb = Math.max(0.04, Math.min(0.18, biometricSpoofScore * 0.85));
       } else {
-        // Likely playing an AI voice or phone speaker into the microphone
+        // Synthetic TTS or flat speaker played into microphone
         finalSpoofProb = rawAasistSpoof * 0.55 + biometricSpoofScore * 0.45;
       }
     } else if (captureMode === 'screen_audio') {
-      finalSpoofProb = rawAasistSpoof * 0.65 + biometricSpoofScore * 0.35;
-    } else {
-      // File upload: fuse AASIST with Biometric Vocoder check
-      // If AASIST has flat window response on an unseen real recording, temper it with biometric score
-      if (windowSpread < 0.015 && rawAasistSpoof > 0.45 && rawAasistSpoof < 0.75) {
-        finalSpoofProb = rawAasistSpoof * 0.45 + biometricSpoofScore * 0.55;
+      if (isNaturalHumanBiometrics && windowSpread < 0.01) {
+        finalSpoofProb = biometricSpoofScore * 0.75 + rawAasistSpoof * 0.25;
       } else {
-        finalSpoofProb = rawAasistSpoof * 0.78 + biometricSpoofScore * 0.22;
+        finalSpoofProb = rawAasistSpoof * 0.65 + biometricSpoofScore * 0.35;
+      }
+    } else {
+      // Unseen File Upload:
+      // ASVspoof2019 AASIST saturates (>0.98 with spread 0.0) on unseen out-of-domain audio.
+      // When AASIST has zero window spread on an unseen recording that has strong natural human vocal biometrics,
+      // weight the vocal cord biometrics so real unseen voices aren't false-flagged.
+      if (isNaturalHumanBiometrics && windowSpread < 0.015) {
+        finalSpoofProb = biometricSpoofScore * 0.82 + rawAasistSpoof * 0.18;
+      } else {
+        finalSpoofProb = rawAasistSpoof * 0.72 + biometricSpoofScore * 0.28;
       }
     }
 
@@ -317,7 +343,6 @@ export async function POST(req: NextRequest) {
     // 4. Classify specific Audio Source Profile (AI Voice, Mimic Audio, Screen Audio, Authentic Human)
     let audioCategory = 'Authentic Human Voice';
     let categoryBadge = 'REAL HUMAN SPEECH';
-    let detectionSignals: { label: string; value: string; status: 'good' | 'warn' | 'danger' }[] = [];
 
     if (!isSpoof) {
       if (captureMode === 'microphone') {
@@ -334,7 +359,7 @@ export async function POST(req: NextRequest) {
       if (captureMode === 'screen_audio') {
         audioCategory = 'Synthetic AI Voice in Screen / Tab Audio';
         categoryBadge = 'SCREEN AI AUDIO';
-      } else if (metrics.pitchJitterEstimate < 0.013) {
+      } else if (metrics.pitchJitterEstimate < 0.011) {
         audioCategory = 'AI Voice Clone / Neural TTS (ElevenLabs / XTTS Profile)';
         categoryBadge = 'AI VOICE CLONE';
       } else if (metrics.highFreqRatio > 0.22 || metrics.zcrVariance > 0.0035) {
@@ -346,7 +371,11 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    detectionSignals = [
+    const detectionSignals: {
+      label: string;
+      value: string;
+      status: 'good' | 'warn' | 'danger';
+    }[] = [
       {
         label: 'Pitch Micro-Jitter (Vocal Cord Stability)',
         value: `${(metrics.pitchJitterEstimate * 100).toFixed(2)}% variation`,
@@ -355,12 +384,12 @@ export async function POST(req: NextRequest) {
       {
         label: 'Dynamic Crest Factor (Plosive Range)',
         value: `${metrics.crestFactor.toFixed(2)}x peak-to-RMS`,
-        status: metrics.crestFactor >= 3.5 ? 'good' : 'warn',
+        status: metrics.crestFactor >= 2.1 ? 'good' : 'warn',
       },
       {
         label: 'Syllable Energy Modulation',
         value: `${(metrics.energyVariance * 100).toFixed(1)}% variance`,
-        status: metrics.energyVariance >= 0.3 ? 'good' : 'warn',
+        status: metrics.energyVariance >= 0.18 ? 'good' : 'warn',
       },
       {
         label: 'Neural Spectral Graph Score',

@@ -25,7 +25,9 @@ export async function convertBlobTo16kHzWav(
   captureMode: 'microphone' | 'screen_audio' | 'file_upload' = 'microphone'
 ): Promise<{ wavFile: File; features: ClientAcousticFeatures }> {
   const arrayBuffer = await blob.arrayBuffer();
-  const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+  const AudioCtx =
+    window.AudioContext ||
+    (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
   const audioCtx = new AudioCtx();
 
   let decodedBuffer: AudioBuffer;
@@ -86,7 +88,10 @@ function extractClientAcousticFeatures(
     sumSq += v * v;
     const absV = Math.abs(v);
     if (absV > peak) peak = absV;
-    if (i > 0 && ((samples[i] >= 0 && samples[i - 1] < 0) || (samples[i] < 0 && samples[i - 1] >= 0))) {
+    if (
+      i > 0 &&
+      ((samples[i] >= 0 && samples[i - 1] < 0) || (samples[i] < 0 && samples[i - 1] >= 0))
+    ) {
       zeroCrossings++;
     }
   }
@@ -97,6 +102,7 @@ function extractClientAcousticFeatures(
 
   // Frame-level analysis (25ms frames = 400 samples at 16kHz)
   const frameSize = 400;
+  const corrWindow = 200;
   const numFrames = Math.max(1, Math.floor(n / frameSize));
   const frameEnergies: number[] = [];
   const frameZcrs: number[] = [];
@@ -132,22 +138,46 @@ function extractClientAcousticFeatures(
 
     if (fRms < silenceThreshold) {
       silentFrames++;
-    } else if (fRms > rmsEnergy * 0.4) {
-      // Estimate local pitch period via short-lag autocorrelation (80 Hz to 320 Hz => lag 50 to 200 at 16kHz)
-      let bestLag = 0;
-      let bestCorr = -Infinity;
-      for (let lag = 50; lag <= 180; lag += 2) {
-        let corr = 0;
-        for (let i = 0; i < frameSize - lag; i += 2) {
-          corr += samples[offset + i] * samples[offset + i + lag];
-        }
-        if (corr > bestCorr) {
-          bestCorr = corr;
-          bestLag = lag;
-        }
+    } else if (fRms > rmsEnergy * 0.35) {
+      // Normalized autocorrelation pitch period tracker (84 Hz to 333 Hz => lag 48 to 190 at 16kHz)
+      let e0 = 0;
+      for (let i = 0; i < corrWindow; i += 2) {
+        const x0 = samples[offset + i];
+        e0 += x0 * x0;
       }
-      if (bestLag > 0 && bestCorr > fSq * 0.25) {
-        pitchPeriods.push(bestLag);
+      if (e0 > 1e-7) {
+        let searchStart = 48;
+        for (let l0 = 12; l0 < 95; l0 += 2) {
+          let c0 = 0;
+          for (let i = 0; i < corrWindow; i += 2) {
+            c0 += samples[offset + i] * samples[offset + i + l0];
+          }
+          if (c0 <= 0.2 * e0) {
+            searchStart = Math.max(48, l0);
+            break;
+          }
+        }
+
+        let bestLag = 0;
+        let bestNormCorr = -1.0;
+        for (let lag = searchStart; lag <= 190; lag++) {
+          let corr = 0;
+          let eLag = 0;
+          for (let i = 0; i < corrWindow; i += 2) {
+            const x0 = samples[offset + i];
+            const xl = samples[offset + i + lag];
+            corr += x0 * xl;
+            eLag += xl * xl;
+          }
+          const normCorr = corr / Math.sqrt(e0 * eLag + 1e-9);
+          if (normCorr > bestNormCorr) {
+            bestNormCorr = normCorr;
+            bestLag = lag;
+          }
+        }
+        if (bestLag > 0 && bestNormCorr >= 0.32) {
+          pitchPeriods.push(bestLag);
+        }
       }
     }
   }
@@ -161,18 +191,23 @@ function extractClientAcousticFeatures(
   const zcrVariance =
     frameZcrs.reduce((acc, v) => acc + Math.pow(v - meanZcr, 2), 0) / frameZcrs.length;
 
-  // Pitch jitter (relative period-to-period variation in voiced frames)
+  // Pitch jitter (relative period-to-period variation in voiced frames, excluding octave jumps)
   let pitchJitterEstimate = 0.018;
   if (pitchPeriods.length > 3) {
     let diffSum = 0;
     let periodSum = 0;
+    let validPairs = 0;
     for (let i = 1; i < pitchPeriods.length; i++) {
-      diffSum += Math.abs(pitchPeriods[i] - pitchPeriods[i - 1]);
-      periodSum += pitchPeriods[i];
+      const diff = Math.abs(pitchPeriods[i] - pitchPeriods[i - 1]);
+      if (diff <= 28) {
+        diffSum += diff;
+        periodSum += pitchPeriods[i];
+        validPairs++;
+      }
     }
-    const avgPeriod = periodSum / (pitchPeriods.length - 1);
-    if (avgPeriod > 0) {
-      pitchJitterEstimate = diffSum / ((pitchPeriods.length - 1) * avgPeriod);
+    if (validPairs > 0 && periodSum > 0) {
+      const avgPeriod = periodSum / validPairs;
+      pitchJitterEstimate = Math.min(0.095, diffSum / (validPairs * avgPeriod));
     }
   }
 
@@ -208,13 +243,13 @@ function encodePCM16Wav(samples: Float32Array, sampleRate: number): ArrayBuffer 
   view.setUint32(4, 36 + dataSize, true);
   writeAscii(view, 8, 'WAVE');
   writeAscii(view, 12, 'fmt ');
-  view.setUint32(16, 16, true); // PCM chunk size
-  view.setUint16(20, 1, true); // PCM format = 1
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
   view.setUint16(22, numChannels, true);
   view.setUint32(24, sampleRate, true);
   view.setUint32(28, byteRate, true);
   view.setUint16(32, blockAlign, true);
-  view.setUint16(34, 16, true); // 16-bit
+  view.setUint16(34, 16, true);
   writeAscii(view, 36, 'data');
   view.setUint32(40, dataSize, true);
 
